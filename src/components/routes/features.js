@@ -11,7 +11,7 @@ class FeaturesRequest extends Request {
     );
     return (
       <div>
-        <h2>features</h2>
+        <h2>Features</h2>
         <ul>{ listItems }</ul>
       </div>
     );
