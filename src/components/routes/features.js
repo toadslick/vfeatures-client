@@ -9,7 +9,12 @@ class FeaturesRequest extends Request {
     const listItems = value.map(({ key }) =>
       <li key={ key }>{ key }</li>
     );
-    return <ul>{ listItems }</ul>;
+    return (
+      <div>
+        <h2>features</h2>
+        <ul>{ listItems }</ul>
+      </div>
+    );
   }
 }
 

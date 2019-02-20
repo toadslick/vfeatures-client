@@ -21,12 +21,11 @@ export default class App extends Component {
   render() {
 
     const links = routing.map(({ path, title }) => (
-      <Link
-        to={ '/' + path }
-        key={ path }
-      >
-        { title }
-      </Link>
+      <li key={ path }>
+        <Link to={ '/' + path }>
+          { title }
+        </Link>
+      </li>
     ));
 
     const routes = routing.map(({ path, component }) => (
@@ -48,9 +47,11 @@ export default class App extends Component {
 
     return (
       <div>
+        <h1>vfeatures</h1>
         <nav>
-          { links }
+          <ul>{ links }</ul>
         </nav>
+        <hr/>
         <Switch>
           { routes }
         </Switch>

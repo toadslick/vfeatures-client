@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export default class Silos extends Component {
   render() {
     return (
-      <p>SILOS</p>
+      <h2>SILOS</h2>
     );
   }
 }
