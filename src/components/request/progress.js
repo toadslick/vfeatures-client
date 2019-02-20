@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 export default class RequestProgress extends Component {
-  render () {
+  render() {
     return (
       <p>LOADING</p>
     );

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 export default class History extends Component {
-  render () {
+  render() {
     return (
       <p>HISTORY</p>
     );

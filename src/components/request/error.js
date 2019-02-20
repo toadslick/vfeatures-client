@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 export default class RequestError extends Component {
-  render () {
+  render() {
     return (
       <p>ERROR</p>
     );

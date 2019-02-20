@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 export default class Silos extends Component {
-  render () {
+  render() {
     return (
       <p>SILOS</p>
     );
