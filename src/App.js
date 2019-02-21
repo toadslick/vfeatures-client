@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import './App.css';
 import { Route, Link, Switch } from 'react-router-dom';
 
-import SilosList from './components/routes/silos';
-import ReleasesList from './components/routes/releases';
-import FeaturesList from './components/routes/features';
-import FeatureDetail from './components/routes/feature';
-import History from './components/routes/history';
+import SilosList from './components/routes/silos-list';
+import ReleasesList from './components/routes/releases-list';
+import FeaturesList from './components/routes/features-list';
+import FeatureDetail from './components/routes/feature-detail';
+import ChangesList from './components/routes/changes-list';
 import Home from './components/routes/home';
 import Fallback from './components/routes/fallback';
 
@@ -15,7 +15,7 @@ const navMenuRoutes = [
   { path: '/silos', title: 'Silos', component: SilosList },
   { path: '/releases', title: 'Releases', component: ReleasesList },
   { path: '/features', title: 'Features', component: FeaturesList },
-  { path: '/history', title: 'History', component: History },
+  { path: '/history', title: 'History', component: ChangesList },
 ];
 
 const secondaryRoutes = [
