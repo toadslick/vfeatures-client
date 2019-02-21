@@ -4,7 +4,7 @@ import { connect } from 'react-refetch';
 import config from '../../config';
 import Request from '../request/request';
 
-class FeatureRequest extends Request {
+class FeatureDetail extends Request {
   renderFulfilled([{ id, key, flags }]) {
     const listItems = flags.map(({ id, enabled, release_id }) =>
       <li key={ key }>
@@ -21,5 +21,6 @@ class FeatureRequest extends Request {
 }
 
 export default connect(({ match }) => ({
-  request: `${config.apiRoot}/features/${ match.params.id }`,
-}))(FeatureRequest);
+  featureRequest: `${config.apiRoot}/features/${ match.params.id }`,
+  releasesRequest: `${config.apiRoot}/releases`,
+}))(FeatureDetail);

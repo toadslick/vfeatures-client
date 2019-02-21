@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import config from '../../config';
 import Request from '../request/request';
 
-class FeaturesRequest extends Request {
+class FeaturesList extends Request {
   renderFulfilled([ value ]) {
     const listItems = value.map(({ id, key }) =>
       <li key={ key }>
@@ -25,4 +25,4 @@ class FeaturesRequest extends Request {
 
 export default connect(() => ({
   request: `${config.apiRoot}/features`,
-}))(FeaturesRequest);
+}))(FeaturesList);

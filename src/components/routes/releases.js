@@ -4,7 +4,7 @@ import { connect } from 'react-refetch';
 import config from '../../config';
 import Request from '../request/request';
 
-class ReleasesRequest extends Request {
+class ReleasesList extends Request {
   renderFulfilled([ value ]) {
     const listItems = value.map(({ key }) =>
       <li key={ key }>{ key }</li>
@@ -20,4 +20,4 @@ class ReleasesRequest extends Request {
 
 export default connect(() => ({
   request: `${config.apiRoot}/releases`,
-}))(ReleasesRequest);
+}))(ReleasesList);
