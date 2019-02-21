@@ -7,6 +7,7 @@ import ReleasesList from './components/routes/releases-list';
 import FeaturesList from './components/routes/features-list';
 import FeatureDetail from './components/routes/feature-detail';
 import ChangesList from './components/routes/changes-list';
+import FlagDetail from './components/routes/flag-detail';
 import Home from './components/routes/home';
 import Fallback from './components/routes/fallback';
 
@@ -20,6 +21,7 @@ const navMenuRoutes = [
 
 const secondaryRoutes = [
   { path: '/features/:id', component: FeatureDetail },
+  { path: '/flags/:id', component: FlagDetail },
   { component: Fallback },
 ];
 

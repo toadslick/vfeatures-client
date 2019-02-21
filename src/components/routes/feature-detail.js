@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-refetch';
+import { Link } from 'react-router-dom';
 
 import config from '../../config';
 import Request from '../request/request';
@@ -18,7 +19,10 @@ class FeatureDetail extends Request {
       const { key } = releasesMap[release_id];
       return (
         <li key={ key }>
-          { key }: { enabled ? 'on' : 'off' }
+          { key }: {
+          <Link to={ '/flags/' + id }>
+            { enabled ? 'enabled' : 'disabled' }
+          </Link> }
         </li>
       );
     });
@@ -31,7 +35,7 @@ class FeatureDetail extends Request {
   }
 }
 
-export default connect(({ match }) => ({
-  featureRequest: `${config.apiRoot}/features/${ match.params.id }`,
+export default connect(({ match: { params: { id }}}) => ({
+  featureRequest: `${config.apiRoot}/features/${ id }`,
   releasesRequest: `${config.apiRoot}/releases`,
 }))(FeatureDetail);
