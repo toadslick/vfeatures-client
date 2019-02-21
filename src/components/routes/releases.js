@@ -5,7 +5,7 @@ import config from '../../config';
 import Request from '../request/request';
 
 class ReleasesRequest extends Request {
-  renderFulfilled(value) {
+  renderFulfilled([ value ]) {
     const listItems = value.map(({ key }) =>
       <li key={ key }>{ key }</li>
     );
@@ -18,6 +18,6 @@ class ReleasesRequest extends Request {
   }
 }
 
-export default connect(props => ({
+export default connect(() => ({
   request: `${config.apiRoot}/releases`,
 }))(ReleasesRequest);
