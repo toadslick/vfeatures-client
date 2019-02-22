@@ -1,20 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-refetch';
 import { Link } from 'react-router-dom';
 
 import config from '../../config';
-import Request from '../request/request';
+import RequestWrapper from '../request/wrapper';
 import mapByID from '../../utils/map-by-id';
 
-class FeatureDetail extends Request {
-  requests() {
-    const { featureRequest, releasesRequest } = this.props;
-    return [featureRequest, releasesRequest];
-  }
+class FeatureDetail extends Component {
 
-  renderFulfilled([{ id, key, flags }, releases]) {
+  renderResults([{ id, key, flags }, releases]) {
     const releasesMap = mapByID(releases);
-
     const listItems = flags.map(({ id, enabled, release_id }) => {
       const { key } = releasesMap[release_id];
       return (
@@ -31,6 +26,16 @@ class FeatureDetail extends Request {
         <h2>Features: { key }</h2>
         <ul>{ listItems }</ul>
       </div>
+    );
+  }
+
+  render() {
+    const { featureRequest, releasesRequest } = this.props;
+    return (
+      <RequestWrapper
+        requests={ [featureRequest, releasesRequest] }
+        renderResults= { this.renderResults.bind(this) }
+      />
     );
   }
 }

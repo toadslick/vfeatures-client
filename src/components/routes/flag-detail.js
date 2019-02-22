@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-refetch';
 import { Link } from 'react-router-dom';
 
 import config from '../../config';
-import Request from '../request/request';
+import RequestWrapper from '../request/wrapper';
 
-class FlagDetail extends Request {
-  renderFulfilled([{ id, enabled, feature, release }]) {
+class FlagDetail extends Component {
+
+  renderResults([{ id, enabled, feature, release }]) {
     return (
       <div>
         <h2>
@@ -26,6 +27,16 @@ class FlagDetail extends Request {
           { enabled ? 'disable flag' : 'enable flag' }
         </button>
       </div>
+    );
+  }
+
+  render() {
+    const { request } = this.props;
+    return (
+      <RequestWrapper
+        requests= { [request] }
+        renderResults={ this.renderResults.bind(this) }
+      />
     );
   }
 }
