@@ -10,8 +10,7 @@ import ChangesList from './components/routes/changes-list';
 import FlagDetail from './components/routes/flag-detail';
 import Home from './components/routes/home';
 import Fallback from './components/routes/fallback';
-
-import SessionGuard from './components/session-guard';
+import LoginForm from './components/login-form';
 
 const navMenuRoutes = [
   { path: '/', title: 'Home', component: Home },
@@ -54,10 +53,7 @@ export default class App extends Component {
           <ul>{ links }</ul>
         </nav>
         <hr/>
-        <SessionGuard
-          renderWhenLoggedIn={ () => <p>logged in</p> }
-          renderWhenLoggedOut={ () => <p>logged out</p> }
-        />
+        <LoginForm/>
         <hr/>
         <Switch>
           { routes }
