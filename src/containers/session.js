@@ -4,12 +4,14 @@ import config from '../config';
 
 export default class Session extends Container {
   state = {
-    username: null,
-    token: null,
+    username: localStorage.getItem('username'),
+    token: localStorage.getItem('token'),
   };
 
   login(username, token) {
     this.setState({ username, token });
+    localStorage.setItem('username', username);
+    localStorage.setItem('token', token);
   }
 
   logout() {
@@ -17,6 +19,8 @@ export default class Session extends Container {
       username: null,
       token: null,
     });
+    localStorage.removeItem('username');
+    localStorage.removeItem('token');
   }
 
   loginAttempt({ username, password }) {
@@ -28,7 +32,7 @@ export default class Session extends Container {
     }).then((response) => {
       const token = response.headers.get('authorization');
       return response.json().then(({ username }) => {
-        this.setState({ username, token });
+        this.login(username, token);
       });
     });
   }
