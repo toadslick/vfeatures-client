@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-refetch';
 
 import config from '../../config';
-import RequestWrapper from '../request/wrapper';
+import RequestResult from '../request/result';
 
 class SilosList extends Component {
 
-  renderResults([ value ]) {
+  renderResult([ value ]) {
     const listItems = value.map(({ key }) =>
       <li key={ key }>{ key }</li>
     );
@@ -18,10 +18,9 @@ class SilosList extends Component {
     return (
       <div>
         <h2>Silos</h2>
-        <RequestWrapper
-          requests={ [request] }
-          renderResults={ this.renderResults.bind(this) }
-        />
+        <RequestResult requests={ [request] }>
+          { this.renderResult.bind(this) }
+        </RequestResult>
       </div>
     );
   }

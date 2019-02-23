@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-refetch';
 import { Link } from 'react-router-dom';
 import config from '../../config';
-import RequestWrapper from '../request/wrapper';
+import RequestResult from '../request/result';
 
 class FeaturesList extends Component {
 
-  renderResults([ value ]) {
+  renderResult([ value ]) {
     const listItems = value.map(({ id, key }) =>
       <li key={ key }>
         <Link to={ `/features/${id}` }>
@@ -22,10 +22,9 @@ class FeaturesList extends Component {
     return (
       <div>
         <h2>Features</h2>
-        <RequestWrapper
-          requests={ [request] }
-          renderResults={ this.renderResults.bind(this) }
-        />
+        <RequestResult requests={ [request] }>
+          { this.renderResult.bind(this) }
+        </RequestResult>
       </div>
     );
   }

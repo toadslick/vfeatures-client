@@ -3,12 +3,12 @@ import { connect } from 'react-refetch';
 import { Link } from 'react-router-dom';
 
 import config from '../../config';
-import RequestWrapper from '../request/wrapper';
+import RequestResult from '../request/result';
 import mapByID from '../../utils/map-by-id';
 
 class FeatureDetail extends Component {
 
-  renderResults([{ id, key, flags }, releases]) {
+  renderResult([{ id, key, flags }, releases]) {
     const releasesMap = mapByID(releases);
     const listItems = flags.map(({ id, enabled, release_id }) => {
       const { key } = releasesMap[release_id];
@@ -32,10 +32,9 @@ class FeatureDetail extends Component {
   render() {
     const { featureRequest, releasesRequest } = this.props;
     return (
-      <RequestWrapper
-        requests={ [featureRequest, releasesRequest] }
-        renderResults= { this.renderResults.bind(this) }
-      />
+      <RequestResult requests={ [featureRequest, releasesRequest] }>
+        { this.renderResult.bind(this) }
+      </RequestResult>
     );
   }
 }

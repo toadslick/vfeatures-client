@@ -4,22 +4,22 @@ import { PromiseState } from 'react-refetch';
 import RequestError from './error';
 import RequestProgress from './progress';
 
-class RequestWrapper extends Component {
+class RequestResult extends Component {
 
   render() {
-    const { requests, renderResults, renderProgress, renderRejected } = this.props;
+    const { requests, children, renderProgress, renderRejected } = this.props;
     const { pending, rejected, fulfilled, value } = PromiseState.all(requests);
     if (pending) { return renderProgress(); }
     if (rejected) { return renderRejected(); }
-    if (fulfilled) { return renderResults(value); }
+    if (fulfilled) { return children(value); }
   }
 }
 
-RequestWrapper.defaultProps = {
+RequestResult.defaultProps = {
   requests: [],
   renderProgress: () => <RequestProgress/>,
   renderRejected: () => <RequestError/>,
   renderResults: () => null,
 };
 
-export default RequestWrapper;
+export default RequestResult;

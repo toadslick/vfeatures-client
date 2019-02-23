@@ -3,7 +3,7 @@ import { connect } from 'react-refetch';
 import { Link } from 'react-router-dom';
 
 import config from '../../config';
-import RequestWrapper from '../request/wrapper';
+import RequestResult from '../request/result';
 import SessionGuard from '../session-guard';
 
 class FlagDetail extends Component {
@@ -25,7 +25,7 @@ class FlagDetail extends Component {
     );
   }
 
-  renderResults([{ id, enabled, feature, release }]) {
+  renderResult([{ id, enabled, feature, release }]) {
     return (
       <div>
         <h2>
@@ -51,10 +51,9 @@ class FlagDetail extends Component {
   render() {
     const { request } = this.props;
     return (
-      <RequestWrapper
-        requests= { [request] }
-        renderResults={ this.renderResults.bind(this) }
-      />
+      <RequestResult requests={ [request] }>
+        { this.renderResult.bind(this) }
+      </RequestResult>
     );
   }
 }
