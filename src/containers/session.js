@@ -1,7 +1,5 @@
 import { Container } from 'unstated';
 
-import config from '../config';
-
 export default class Session extends Container {
   state = {
     username: localStorage.getItem('username'),
@@ -21,20 +19,6 @@ export default class Session extends Container {
     });
     localStorage.removeItem('username');
     localStorage.removeItem('token');
-  }
-
-  loginAttempt({ username, password }) {
-    fetch(`${config.apiRoot}/login`, {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ user: { username, password }}),
-      mode: 'cors',
-    }).then((response) => {
-      const token = response.headers.get('authorization');
-      return response.json().then(({ username }) => {
-        this.login(username, token);
-      });
-    });
   }
 
   isLoggedIn() {

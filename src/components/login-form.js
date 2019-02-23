@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-refetch';
 
+import config from '../config';
 import SessionGuard from './session-guard';
 
-export default class LoginForm extends Component {
+class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,12 +22,18 @@ export default class LoginForm extends Component {
 
   login(session, e) {
     e.preventDefault();
-    session.loginAttempt(this.state);
+    const { attempt } = this.props;
+    const { username, password } = this.state;
+    attempt(username, password, session);
   }
 
   logout(session, e) {
     e.preventDefault();
     session.logout();
+    this.setState({
+      username: '',
+      password: '',
+    });
   }
 
   renderWhenLoggedIn(session) {
@@ -36,7 +44,9 @@ export default class LoginForm extends Component {
         <button
           type='button'
           onClick={ this.logout.bind(this, session) }
-        >Log Out</button>
+        >
+          Log Out
+        </button>
       </div>
     );
   }
@@ -74,3 +84,34 @@ export default class LoginForm extends Component {
     );
   }
 }
+
+export default connect(() => ({
+  attempt: (username, password, session) => ({
+    request: {
+      url: `${config.apiRoot}/login`,
+      method: 'POST',
+      body: JSON.stringify({ user: { username, password }}),
+      force: true,
+
+      // By default, only the body of the response is exposed by React Refetch.
+      // Overwrite the `handleResponse` function so that the authorization header
+      // can be retrieved and stored.
+      handleResponse: response => {
+        const { headers, status } = response;
+        const json = response.json();
+
+        if (headers.get('content-length') === '0' || status === 204) { return; }
+
+        if (status === 200) {
+          const token = response.headers.get('authorization');
+          json.then((body) => {
+            session.login(body.username, token);
+            return Promise.resolve(body);
+          });
+        } else {
+          return json.then(({ error }) => Promise.reject(error));
+        }
+      },
+    },
+  }),
+}))(LoginForm);
