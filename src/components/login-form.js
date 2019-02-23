@@ -2,15 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-refetch';
 
 import config from '../config';
-import SessionGuard from './session-guard';
+import session from './connect-session';
 
 class LoginForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: '',
-      password: '',
-    };
+  state = {
+    username: '',
+    password: '',
   }
 
   input(propName, e) {
@@ -20,15 +17,15 @@ class LoginForm extends Component {
     });
   }
 
-  login(session, e) {
+  login(e) {
     e.preventDefault();
     const { attempt } = this.props;
-    const { username, password } = this.state;
-    attempt(username, password, session);
+    attempt(this.state);
   }
 
-  logout(session, e) {
+  logout(e) {
     e.preventDefault();
+    const { session } = this.props;
     session.logout();
     this.setState({
       username: '',
@@ -36,57 +33,49 @@ class LoginForm extends Component {
     });
   }
 
-  renderWhenLoggedIn(session) {
-    const { username } = session.state;
-    return (
-      <div>
-        <p>{ username }</p>
-        <button
-          type='button'
-          onClick={ this.logout.bind(this, session) }
-        >
-          Log Out
-        </button>
-      </div>
-    );
-  }
-
-  renderWhenLoggedOut(session) {
-    return (
-      <form onSubmit={ this.login.bind(this, session) }>
-        <label>
-          <span>Username</span>
-          <input
-            type='text'
-            onChange={ this.input.bind(this, 'username') }
-            placeholder='Username'
-          />
-        </label>
-        <label>
-          <span>Password</span>
-          <input
-            type='password'
-            onChange={ this.input.bind(this, 'password') }
-            placeholder='Password'
-          />
-        </label>
-        <button>Log In</button>
-      </form>
-    );
-  }
-
   render() {
-    return (
-      <SessionGuard
-        renderWhenLoggedIn={ this.renderWhenLoggedIn.bind(this) }
-        renderWhenLoggedOut={ this.renderWhenLoggedOut.bind(this) }
-      />
-    );
+    const { session } = this.props;
+
+    if (session.authorized()) {
+      return (
+        <div>
+          <p>{ session.state.username }</p>
+          <button
+            type='button'
+            onClick={ this.logout.bind(this) }
+          >
+            Log Out
+          </button>
+        </div>
+      );
+    } else {
+      return (
+        <form onSubmit={ this.login.bind(this) }>
+          <label>
+            <span>Username</span>
+            <input
+              type='text'
+              onChange={ this.input.bind(this, 'username') }
+              placeholder='Username'
+            />
+          </label>
+          <label>
+            <span>Password</span>
+            <input
+              type='password'
+              onChange={ this.input.bind(this, 'password') }
+              placeholder='Password'
+            />
+          </label>
+          <button>Log In</button>
+        </form>
+      );
+    }
   }
 }
 
-export default connect(() => ({
-  attempt: (username, password, session) => ({
+export default session(connect(({ session }) => ({
+  attempt: ({ username, password }) => ({
     request: {
       url: `${config.apiRoot}/login`,
       method: 'POST',
@@ -114,4 +103,4 @@ export default connect(() => ({
       },
     },
   }),
-}))(LoginForm);
+}))(LoginForm));

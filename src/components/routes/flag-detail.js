@@ -18,7 +18,7 @@ class FlagDetail extends Component {
   }
 
   renderResult([{ id, enabled, feature, release }]) {
-    const { session: { authorized }} = this.props;
+    const { session } = this.props;
     return (
       <div>
         <h2>
@@ -34,7 +34,7 @@ class FlagDetail extends Component {
         <p>
           { enabled ? 'enabled' : 'disabled' }
         </p>
-        { authorized &&
+        { session.authorized() &&
           <button
             type='button'
             onClick= { this.toggleClicked.bind(this) }
