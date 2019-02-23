@@ -4,8 +4,26 @@ import { Link } from 'react-router-dom';
 
 import config from '../../config';
 import RequestWrapper from '../request/wrapper';
+import SessionGuard from '../session-guard';
 
 class FlagDetail extends Component {
+
+  toggleClicked(enabled, token, e) {
+    e.preventDefault();
+    const { toggle } = this.props;
+    toggle(token, enabled);
+  }
+
+  renderWhenLoggedIn(enabled, { state: { token }}) {
+    return (
+      <button
+        type='button'
+        onClick= { this.toggleClicked.bind(this, !enabled, token) }
+      >
+        { enabled ? 'disable flag' : 'enable flag' }
+      </button>
+    );
+  }
 
   renderResults([{ id, enabled, feature, release }]) {
     return (
@@ -23,9 +41,9 @@ class FlagDetail extends Component {
         <p>
           { enabled ? 'enabled' : 'disabled' }
         </p>
-        <button type='button'>
-          { enabled ? 'disable flag' : 'enable flag' }
-        </button>
+        <SessionGuard
+          renderWhenLoggedIn={ this.renderWhenLoggedIn.bind(this, enabled) }
+        />
       </div>
     );
   }
@@ -41,6 +59,23 @@ class FlagDetail extends Component {
   }
 }
 
-export default connect(({ match: { params: { id }}}) => ({
-  request: `${config.apiRoot}/flags/${id}`,
-}))(FlagDetail);
+export default connect(({ match: { params: { id }}}) => {
+  const url = `${config.apiRoot}/flags/${id}`;
+  return {
+    request: url,
+    toggle: (token, enabled) => ({
+      request: {
+        url,
+        method: 'PUT',
+        body: JSON.stringify({
+          flag: { enabled },
+        }),
+        headers: {
+          authorization: token,
+        },
+        force: true,
+        refreshing: true,
+      },
+    }),
+  };
+})(FlagDetail);

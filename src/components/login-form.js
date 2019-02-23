@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { Provider, Subscribe } from 'unstated';
 
-import Session from '../containers/session';
 import SessionGuard from './session-guard';
 
 export default class LoginForm extends Component {
@@ -69,16 +67,10 @@ export default class LoginForm extends Component {
 
   render() {
     return (
-      <Provider>
-        <Subscribe to={ [Session] }>
-          { session => (
-            <SessionGuard
-              renderWhenLoggedIn={ this.renderWhenLoggedIn.bind(this, session) }
-              renderWhenLoggedOut={ this.renderWhenLoggedOut.bind(this, session) }
-            />
-          )}
-        </Subscribe>
-      </Provider>
+      <SessionGuard
+        renderWhenLoggedIn={ this.renderWhenLoggedIn.bind(this) }
+        renderWhenLoggedOut={ this.renderWhenLoggedOut.bind(this) }
+      />
     );
   }
 }
