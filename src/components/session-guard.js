@@ -8,7 +8,7 @@ class SessionGuard extends Component {
     return (
       <Subscribe to={ [Session] }>
         { session => {
-          if (session.isLoggedIn()) {
+          if (session.authorized()) {
             return renderWhenLoggedIn(session);
           } else {
             return renderWhenLoggedOut(session);

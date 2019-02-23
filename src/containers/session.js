@@ -21,7 +21,7 @@ export default class Session extends Container {
     localStorage.removeItem('token');
   }
 
-  isLoggedIn() {
+  authorized() {
     const { username, token } = this.state;
     return username && token;
   }

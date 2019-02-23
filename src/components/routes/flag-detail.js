@@ -4,28 +4,21 @@ import { Link } from 'react-router-dom';
 
 import config from '../../config';
 import RequestResult from '../request/result';
-import SessionGuard from '../session-guard';
+import session from '../connect-session';
 
 class FlagDetail extends Component {
 
-  toggleClicked(enabled, token, e) {
+  toggleClicked(e) {
     e.preventDefault();
-    const { toggle } = this.props;
-    toggle(token, enabled);
-  }
-
-  renderWhenLoggedIn(enabled, { state: { token }}) {
-    return (
-      <button
-        type='button'
-        onClick= { this.toggleClicked.bind(this, !enabled, token) }
-      >
-        { enabled ? 'disable flag' : 'enable flag' }
-      </button>
-    );
+    const {
+      toggle,
+      request: { value: { enabled }},
+    } = this.props;
+    toggle(!enabled);
   }
 
   renderResult([{ id, enabled, feature, release }]) {
+    const { session: { authorized }} = this.props;
     return (
       <div>
         <h2>
@@ -41,9 +34,14 @@ class FlagDetail extends Component {
         <p>
           { enabled ? 'enabled' : 'disabled' }
         </p>
-        <SessionGuard
-          renderWhenLoggedIn={ this.renderWhenLoggedIn.bind(this, enabled) }
-        />
+        { authorized &&
+          <button
+            type='button'
+            onClick= { this.toggleClicked.bind(this) }
+          >
+            { enabled ? 'disable flag' : 'enable flag' }
+          </button>
+        }
       </div>
     );
   }
@@ -58,21 +56,21 @@ class FlagDetail extends Component {
   }
 }
 
-export default connect(({ match: { params: { id }}}) => {
+export default session(connect(props => {
+  const {
+    match: { params: { id }},
+    session: { state: { token }},
+  } = props;
   const url = `${config.apiRoot}/flags/${id}`;
   return {
     request: url,
-    toggle: (token, enabled) => ({
+    toggle: enabled => ({
       request: {
         url,
         method: 'PUT',
-        body: JSON.stringify({
-          flag: { enabled },
-        }),
-        headers: {
-          authorization: token,
-        },
+        body: JSON.stringify({ flag: { enabled }}),
+        headers: { authorization: token },
       },
     }),
   };
-})(FlagDetail);
+})(FlagDetail));
