@@ -5,3 +5,8 @@
 hr {
   margin: auto -20px;
 }
+
+label span {
+  position: absolute;
+  left: -9999px;
+}

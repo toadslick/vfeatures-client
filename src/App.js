@@ -52,9 +52,7 @@ export default class App extends Component {
         <nav>
           <ul>{ links }</ul>
         </nav>
-        <hr/>
         <LoginForm/>
-        <hr/>
         <Switch>
           { routes }
         </Switch>
