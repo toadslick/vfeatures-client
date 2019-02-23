@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
 import { Route, Link, Switch } from 'react-router-dom';
+
+import './App.css';
 
 import SilosList from './components/routes/silos-list';
 import ReleasesList from './components/routes/releases-list';

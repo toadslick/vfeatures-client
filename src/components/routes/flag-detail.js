@@ -73,8 +73,6 @@ export default connect(({ match: { params: { id }}}) => {
         headers: {
           authorization: token,
         },
-        force: true,
-        refreshing: true,
       },
     }),
   };
