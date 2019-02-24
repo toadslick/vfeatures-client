@@ -5,13 +5,8 @@ import { Link } from 'react-router-dom';
 import config from '../../config';
 import mapByID from '../../utils/map-by-id';
 import RequestResult from '../request/result';
-import ConfirmationButton from '../confirmation-button';
 
 class ReleaseDetail extends Component {
-
-  delete(id) {
-    console.log('DELETE RELEASE', id);
-  }
 
   renderResult([{ id, key, flags }, featuresMap]) {
 
@@ -36,12 +31,6 @@ class ReleaseDetail extends Component {
           : { key }
         </h2>
         <ul>{ listItems }</ul>
-        <ConfirmationButton
-          value={ key }
-          onConfirm={ this.delete.bind(this, id) }
-        >
-          Delete this Release
-        </ConfirmationButton>
       </main>
     );
   }
