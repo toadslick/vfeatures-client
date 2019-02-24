@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import config from '../../config';
 import session from '../connect-session';
+import authorizedRequest from '../../utils/authorized-request';
 import RequestResult from '../request/result';
 import RequestFieldset from '../request/fieldset';
 
@@ -60,20 +61,22 @@ class FlagDetail extends Component {
 }
 
 export default session(connect(props => {
+
   const {
     match: { params: { id }},
-    session: { state: { token }},
+    session,
   } = props;
+
   const url = `${config.apiRoot}/flags/${id}`;
+
   return {
     request: url,
     toggle: enabled => ({
-      request: {
+      request: authorizedRequest(session, {
         url,
         method: 'PUT',
         body: JSON.stringify({ flag: { enabled }}),
-        headers: { authorization: token },
-      },
+      }),
     }),
   };
 })(FlagDetail));

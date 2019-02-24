@@ -3,6 +3,7 @@ import { connect } from 'react-refetch';
 
 import config from '../config';
 import session from './connect-session';
+import handleLoginResponse from '../utils/handle-login-response';
 import RequestFieldset from './request/fieldset';
 
 class LoginForm extends Component {
@@ -84,26 +85,7 @@ export default session(connect(({ session }) => ({
       method: 'POST',
       body: JSON.stringify({ user: { username, password }}),
       force: true,
-
-      // By default, only the body of the response is exposed by React Refetch.
-      // Overwrite the `handleResponse` function so that the authorization header
-      // can be retrieved and stored.
-      handleResponse: response => {
-        const { headers, status } = response;
-        const json = response.json();
-
-        if (headers.get('content-length') === '0' || status === 204) { return; }
-
-        if (status === 200) {
-          const token = response.headers.get('authorization');
-          json.then((body) => {
-            session.login(body.username, token);
-            return Promise.resolve(body);
-          });
-        } else {
-          return json.then(({ error }) => Promise.reject(error));
-        }
-      },
+      handleResponse: handleLoginResponse(session),
     },
   }),
 }))(LoginForm));
