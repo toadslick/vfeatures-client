@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-refetch';
+import { Link } from 'react-router-dom';
 
 import config from '../../config';
 import RequestResult from '../request/result';
@@ -7,8 +8,12 @@ import RequestResult from '../request/result';
 class ReleasesList extends Component {
 
   renderResult([ value ]) {
-    const listItems = value.map(({ key }) =>
-      <li key={ key }>{ key }</li>
+    const listItems = value.map(({ id, key }) =>
+      <li key={ key }>
+        <Link to={ `/releases/${id}` }>
+          { key }
+        </Link>
+      </li>
     );
     return <ul>{ listItems }</ul>;
   }
@@ -16,12 +21,12 @@ class ReleasesList extends Component {
   render() {
     const { request } = this.props;
     return (
-      <div>
+      <main>
         <h2>Releases</h2>
         <RequestResult requests={ [request] }>
           { this.renderResult.bind(this) }
         </RequestResult>
-      </div>
+      </main>
     );
   }
 }

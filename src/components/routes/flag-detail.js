@@ -22,7 +22,7 @@ class FlagDetail extends Component {
   renderResult([{ id, enabled, feature, release }]) {
     const { session, request } = this.props;
     return (
-      <div>
+      <main>
         <h2>
           Flag for {
           <Link to={ '/features/' + feature.id }>
@@ -46,7 +46,7 @@ class FlagDetail extends Component {
             </button>
           </RequestFieldset>
         }
-      </div>
+      </main>
     );
   }
 

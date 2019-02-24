@@ -20,12 +20,12 @@ class FeaturesList extends Component {
   render() {
     const { request } = this.props;
     return (
-      <div>
+      <main>
         <h2>Features</h2>
         <RequestResult requests={ [request] }>
           { this.renderResult.bind(this) }
         </RequestResult>
-      </div>
+      </main>
     );
   }
 }

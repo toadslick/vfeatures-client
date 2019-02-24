@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-refetch';
+import { Link } from 'react-router-dom';
 
 import config from '../../config';
 import mapByID from '../../utils/map-by-id';
@@ -8,9 +9,12 @@ import RequestResult from '../request/result';
 class SilosList extends Component {
 
   renderResult([ silos, releasesMap ]) {
-    const listItems = silos.map(({ key, release_id }) =>
+    const listItems = silos.map(({ id, key, release_id }) =>
       <li key={ key }>
-        { key }: { releasesMap[release_id].key }
+        <Link to={ `/silos/${id}` }>
+          { key }
+        </Link>
+        : { releasesMap[release_id].key }
       </li>
     );
     return <ul>{ listItems }</ul>;
@@ -19,12 +23,12 @@ class SilosList extends Component {
   render() {
     const { silosRequest, releasesRequest } = this.props;
     return (
-      <div>
+      <main>
         <h2>Silos</h2>
         <RequestResult requests={ [silosRequest, releasesRequest] }>
           { this.renderResult.bind(this) }
         </RequestResult>
-      </div>
+      </main>
     );
   }
 }

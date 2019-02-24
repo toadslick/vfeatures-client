@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 export default class Home extends Component {
   render() {
     return (
-      <h2>Welcome</h2>
+      <main>
+        <h2>vfeatures</h2>
+      </main>
     );
   }
 }

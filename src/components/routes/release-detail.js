@@ -6,11 +6,11 @@ import config from '../../config';
 import RequestResult from '../request/result';
 import mapByID from '../../utils/map-by-id';
 
-class FeatureDetail extends Component {
+class ReleaseDetail extends Component {
 
-  renderResult([{ id, key, flags }, releasesMap]) {
-    const listItems = flags.map(({ id, enabled, release_id }) => {
-      const { key } = releasesMap[release_id];
+  renderResult([{ id, key, flags }, featuresMap]) {
+    const listItems = flags.map(({ id, enabled, feature_id }) => {
+      const { key } = featuresMap[feature_id];
       return (
         <li key={ key }>
           { key }: {
@@ -23,8 +23,8 @@ class FeatureDetail extends Component {
     return (
       <main>
         <h2>
-          <Link to='/features'>
-            Features
+          <Link to='/releases'>
+            Releases
           </Link>
           : { key }
         </h2>
@@ -34,9 +34,9 @@ class FeatureDetail extends Component {
   }
 
   render() {
-    const { featureRequest, releasesRequest } = this.props;
+    const { releaseRequest, featuresRequest } = this.props;
     return (
-      <RequestResult requests={ [featureRequest, releasesRequest] }>
+      <RequestResult requests={ [releaseRequest, featuresRequest] }>
         { this.renderResult.bind(this) }
       </RequestResult>
     );
@@ -44,9 +44,9 @@ class FeatureDetail extends Component {
 }
 
 export default connect(({ match: { params: { id }}}) => ({
-  featureRequest: `${config.apiRoot}/features/${ id }`,
-  releasesRequest: {
-    url: `${config.apiRoot}/releases`,
-    then: releases => ({ value: mapByID(releases) }),
+  releaseRequest: `${config.apiRoot}/releases/${ id }`,
+  featuresRequest: {
+    url: `${config.apiRoot}/features`,
+    then: features => ({ value: mapByID(features) }),
   },
-}))(FeatureDetail);
+}))(ReleaseDetail);

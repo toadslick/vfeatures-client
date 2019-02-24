@@ -2,18 +2,20 @@ import React, { Component } from 'react';
 import { Route, Link, Switch } from 'react-router-dom';
 
 import './App.css';
+import LoginForm from './components/login-form';
 
 import SilosList from './components/routes/silos-list';
+import SiloDetail from './components/routes/silo-detail';
 import ReleasesList from './components/routes/releases-list';
+import ReleaseDetail from './components/routes/release-detail';
 import FeaturesList from './components/routes/features-list';
 import FeatureDetail from './components/routes/feature-detail';
 import ChangesList from './components/routes/changes-list';
 import FlagDetail from './components/routes/flag-detail';
 import Home from './components/routes/home';
 import Fallback from './components/routes/fallback';
-import LoginForm from './components/login-form';
 
-const navMenuRoutes = [
+const navItems = [
   { path: '/', title: 'Home', component: Home },
   { path: '/silos', title: 'Silos', component: SilosList },
   { path: '/releases', title: 'Releases', component: ReleasesList },
@@ -21,24 +23,28 @@ const navMenuRoutes = [
   { path: '/history', title: 'History', component: ChangesList },
 ];
 
-const secondaryRoutes = [
+const allItems = navItems.concat([
   { path: '/features/:id', component: FeatureDetail },
+  { path: '/silos/:id', component: SiloDetail },
+  { path: '/releases/:id', component: ReleaseDetail },
   { path: '/flags/:id', component: FlagDetail },
   { component: Fallback },
-];
+]);
 
 export default class App extends Component {
-  render() {
 
-    const links = navMenuRoutes.map(({ path, title }) => (
+  links() {
+    return navItems.map(({ path, title }) => (
       <li key={ path }>
         <Link to={ path }>
           { title }
         </Link>
       </li>
     ));
+  }
 
-    const routes = navMenuRoutes.concat(secondaryRoutes).map(({ path, component }) => (
+  routes() {
+    return allItems.map(({ path, component }) => (
       <Route
         exact
         path={ path }
@@ -46,16 +52,21 @@ export default class App extends Component {
         key={ '' + path }
       />
     ));
+  }
 
+  render() {
     return (
       <div>
-        <h1>vfeatures</h1>
         <nav>
-          <ul>{ links }</ul>
+          <ul>
+            { this.links() }
+          </ul>
         </nav>
-        <LoginForm/>
+        <aside>
+          <LoginForm/>
+        </aside>
         <Switch>
-          { routes }
+          { this.routes() }
         </Switch>
       </div>
     );
