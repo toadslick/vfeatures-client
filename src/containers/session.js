@@ -4,18 +4,21 @@ import { Container } from 'unstated';
 // The `token` is the value of the JWT bearer token that is used in
 // `Authorization` headers of authenticated requests.
 //
-// The state is also preserved in localStorage so that a logged-in user is
-// maintained across browser sessions.
+// TODO: uses cookies instead of localStorage so that the JWT token expires
+// on the client side at the same time that it expires on the server side.
+// This prevents a user from appearing to be logged in when their JWT session
+// has already expired on the server.
+
 export default class Session extends Container {
   state = {
-    username: localStorage.getItem('username'),
-    token: localStorage.getItem('token'),
+    username: null, // localStorage.getItem('username'),
+    token: null, // localStorage.getItem('token'),
   };
 
   login(username, token) {
     this.setState({ username, token });
-    localStorage.setItem('username', username);
-    localStorage.setItem('token', token);
+    // localStorage.setItem('username', username);
+    // localStorage.setItem('token', token);
   }
 
   logout() {
@@ -23,8 +26,8 @@ export default class Session extends Container {
       username: null,
       token: null,
     });
-    localStorage.removeItem('username');
-    localStorage.removeItem('token');
+    // localStorage.removeItem('username');
+    // localStorage.removeItem('token');
   }
 
   authorized() {
