@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { PromiseState } from 'react-refetch';
 
-import RequestError from './error';
-import RequestProgress from './progress';
+import RequestError from './request-error';
+import RequestProgress from './request-progress';
 
 class RequestResult extends Component {
 

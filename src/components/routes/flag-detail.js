@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 
 import config from '../../config';
 import session from '../connect-session';
-import authorizedRequest from '../../utils/authorized-request';
-import RequestResult from '../request/result';
-import RequestFieldset from '../request/fieldset';
+import authorizedRequest from '../../utils/refetch/authorized-request';
+import RequestResult from '../request-result';
+import RequestFieldset from '../request-fieldset';
 
 class FlagDetail extends Component {
 

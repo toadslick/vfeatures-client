@@ -3,8 +3,8 @@ import { connect } from 'react-refetch';
 
 import config from '../config';
 import session from './connect-session';
-import handleLoginResponse from '../utils/handle-login-response';
-import RequestFieldset from './request/fieldset';
+import handleLoginResponse from '../utils/refetch/handle-login-response';
+import RequestFieldset from './request-fieldset';
 
 class LoginForm extends Component {
   state = {

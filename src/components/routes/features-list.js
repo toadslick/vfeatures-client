@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-refetch';
 import { Link } from 'react-router-dom';
 import config from '../../config';
-import RequestResult from '../request/result';
+import RequestResult from '../request-result';
 
 class FeaturesList extends Component {
 

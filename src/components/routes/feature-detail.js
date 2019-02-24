@@ -3,7 +3,7 @@ import { connect } from 'react-refetch';
 import { Link } from 'react-router-dom';
 
 import config from '../../config';
-import RequestResult from '../request/result';
+import RequestResult from '../request-result';
 import mapByID from '../../utils/map-by-id';
 
 class FeatureDetail extends Component {

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import config from '../../config';
 import mapByID from '../../utils/map-by-id';
-import RequestResult from '../request/result';
+import RequestResult from '../request-result';
 
 class ReleaseDetail extends Component {
 
