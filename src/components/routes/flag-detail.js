@@ -13,10 +13,10 @@ class FlagDetail extends Component {
   toggleClicked(e) {
     e.preventDefault();
     const {
-      toggle,
+      sendToggleRequest,
       request: { value: { enabled }},
     } = this.props;
-    toggle(!enabled);
+    sendToggleRequest(!enabled);
   }
 
   renderResult([{ id, enabled, feature, release }]) {
@@ -71,7 +71,7 @@ export default session(connect(props => {
 
   return {
     request: url,
-    toggle: enabled => ({
+    sendToggleRequest: enabled => ({
       request: authorizedRequest(session, {
         url,
         method: 'PUT',
