@@ -2,6 +2,8 @@ import React from 'react';
 import { Subscribe } from 'unstated';
 import Session from '../containers/session';
 
+// This higher-order component takes a component and adds the `session` to its
+// props so that the component does not need to be wrapped in a <Subscribe>.
 export default Component => props => (
   <Subscribe to={ [Session] }>
     { session => {
@@ -10,8 +12,8 @@ export default Component => props => (
       const { username, token } = session.state;
       const sessionProps = {
         session,
-        username,
-        token,
+        sessionUsername: username,
+        sessionToken: token,
       };
       return <Component { ...props } { ...sessionProps }/>
     }}

@@ -3,6 +3,7 @@ import { connect } from 'react-refetch';
 
 import config from '../config';
 import session from './connect-session';
+import RequestFieldset from './request/fieldset';
 
 class LoginForm extends Component {
   state = {
@@ -34,7 +35,7 @@ class LoginForm extends Component {
   }
 
   render() {
-    const { session } = this.props;
+    const { session, request } = this.props;
 
     if (session.authorized()) {
       return (
@@ -51,23 +52,25 @@ class LoginForm extends Component {
     } else {
       return (
         <form onSubmit={ this.login.bind(this) }>
-          <label>
-            <span>Username</span>
-            <input
-              type='text'
-              onChange={ this.input.bind(this, 'username') }
-              placeholder='Username'
-            />
-          </label>
-          <label>
-            <span>Password</span>
-            <input
-              type='password'
-              onChange={ this.input.bind(this, 'password') }
-              placeholder='Password'
-            />
-          </label>
-          <button>Log In</button>
+          <RequestFieldset requests={ [request] }>
+            <label>
+              <span>Username</span>
+              <input
+                type='text'
+                onChange={ this.input.bind(this, 'username') }
+                placeholder='Username'
+              />
+            </label>
+            <label>
+              <span>Password</span>
+              <input
+                type='password'
+                onChange={ this.input.bind(this, 'password') }
+                placeholder='Password'
+              />
+            </label>
+            <button>Log In</button>
+          </RequestFieldset>
         </form>
       );
     }

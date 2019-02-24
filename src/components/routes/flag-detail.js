@@ -3,8 +3,9 @@ import { connect } from 'react-refetch';
 import { Link } from 'react-router-dom';
 
 import config from '../../config';
-import RequestResult from '../request/result';
 import session from '../connect-session';
+import RequestResult from '../request/result';
+import RequestFieldset from '../request/fieldset';
 
 class FlagDetail extends Component {
 
@@ -18,7 +19,7 @@ class FlagDetail extends Component {
   }
 
   renderResult([{ id, enabled, feature, release }]) {
-    const { session } = this.props;
+    const { session, request } = this.props;
     return (
       <div>
         <h2>
@@ -35,12 +36,14 @@ class FlagDetail extends Component {
           { enabled ? 'enabled' : 'disabled' }
         </p>
         { session.authorized() &&
-          <button
-            type='button'
-            onClick= { this.toggleClicked.bind(this) }
-          >
-            { enabled ? 'disable flag' : 'enable flag' }
-          </button>
+          <RequestFieldset requests={ [request] }>
+            <button
+              type='button'
+              onClick= { this.toggleClicked.bind(this) }
+            >
+              { enabled ? 'disable flag' : 'enable flag' }
+            </button>
+          </RequestFieldset>
         }
       </div>
     );
