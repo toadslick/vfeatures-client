@@ -8,8 +8,7 @@ import mapByID from '../../utils/map-by-id';
 
 class FeatureDetail extends Component {
 
-  renderResult([{ id, key, flags }, releases]) {
-    const releasesMap = mapByID(releases);
+  renderResult([{ id, key, flags }, releasesMap]) {
     const listItems = flags.map(({ id, enabled, release_id }) => {
       const { key } = releasesMap[release_id];
       return (
@@ -41,5 +40,8 @@ class FeatureDetail extends Component {
 
 export default connect(({ match: { params: { id }}}) => ({
   featureRequest: `${config.apiRoot}/features/${ id }`,
-  releasesRequest: `${config.apiRoot}/releases`,
+  releasesRequest: {
+    url: `${config.apiRoot}/releases`,
+    then: releases => ({ value: mapByID(releases) }),
+  },
 }))(FeatureDetail);
