@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import connect from '../../utils/refetch/api-connector';
 import RequestResult from '../request-result';
+import DeleteButton from '../delete-button';
 
 class SiloDetail extends Component {
 
@@ -16,6 +17,13 @@ class SiloDetail extends Component {
           : { key }
         </h2>
         <p>{ release.key }</p>
+        <DeleteButton
+          requestURL={ `/silos/${ id }` }
+          redirectURL='/silos'
+          value={ key }
+        >
+          Delete { key }
+        </DeleteButton>
       </main>
     );
   }

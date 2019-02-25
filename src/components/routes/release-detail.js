@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import connect from '../../utils/refetch/api-connector';
-import mapByID from '../../utils/map-by-id';
+import mapBy from '../../utils/map-by-property';
 import RequestResult from '../request-result';
 import DeleteButton from '../delete-button';
 
@@ -56,6 +56,6 @@ export default connect(({ match: { params: { id }}}) => ({
   releaseRequest: `/releases/${ id }`,
   featuresRequest: {
     url: `/features`,
-    then: features => ({ value: mapByID(features) }),
+    then: features => ({ value: mapBy('id', features) }),
   },
 }))(ReleaseDetail);

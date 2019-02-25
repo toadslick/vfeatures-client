@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import connect from '../../utils/refetch/api-connector';
+import mapBy from '../../utils/map-by-property';
 import RequestResult from '../request-result';
-import mapByID from '../../utils/map-by-id';
+import DeleteButton from '../delete-button';
 
 class FeatureDetail extends Component {
 
@@ -28,6 +29,13 @@ class FeatureDetail extends Component {
           : { key }
         </h2>
         <ul>{ listItems }</ul>
+        <DeleteButton
+          requestURL={ `/features/${ id }` }
+          redirectURL='/features'
+          value={ key }
+        >
+          Delete { key }
+        </DeleteButton>
       </main>
     );
   }
@@ -46,6 +54,6 @@ export default connect(({ match: { params: { id }}}) => ({
   featureRequest: `/features/${ id }`,
   releasesRequest: {
     url: `/releases`,
-    then: releases => ({ value: mapByID(releases) }),
+    then: releases => ({ value: mapBy('id', releases) }),
   },
 }))(FeatureDetail);
