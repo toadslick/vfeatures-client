@@ -17,27 +17,23 @@ export default function authorizedRequest(session, options) {
       const { headers, status } = response;
 
       // Return if the response has no body to parse.
-      if (headers.get('content-length') === '0') { return; }
-      if (status === 204 || status === 200) { return; }
+      if (headers.get('content-length') === '0' || status === 204) { return; }
 
       const json = response.json();
 
       // If the successful response has a body,
       // return the JSON-parsing promise.
-      if (response.status >= 200 && response.status < 300) {
-        return json;
-      } else {
+      if (response.status >= 200 && response.status < 300) { return json; }
 
-        // If the response returns a 401 status, assume that the JWT session
-        // has expired or is invalid. Log out of the current session.
-        if (response.status === 401) {
-          session.logout();
-        }
-
-        // Expect error responses to have an `error` key at the
-        // top level of the JSON. Parse the JSON and return that error value.
-        return json.then(({ error }) => Promise.reject(error));
+      // If the response returns a 401 status, assume that the JWT session
+      // has expired or is invalid. Log out of the current session.
+      if (response.status === 401) {
+        session.logout();
       }
+
+      // Expect error responses to have an `error` key at the
+      // top level of the JSON. Parse the JSON and return that error value.
+      return json.then(({ error }) => Promise.reject(error));
     },
   };
 

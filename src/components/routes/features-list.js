@@ -31,5 +31,5 @@ class FeaturesList extends Component {
 }
 
 export default connect(() => ({
-  request: `features`,
+  request: `/features`,
 }))(FeaturesList);

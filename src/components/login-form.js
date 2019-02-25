@@ -80,7 +80,7 @@ class LoginForm extends Component {
 export default session(connect(({ session }) => ({
   attempt: ({ username, password }) => ({
     request: {
-      url: `login`,
+      url: `/login`,
       method: 'POST',
       body: JSON.stringify({ user: { username, password }}),
       force: true,

@@ -31,5 +31,5 @@ class SiloDetail extends Component {
 }
 
 export default connect(({ match: { params: { id }}}) => ({
-  request: `silos/${ id }`,
+  request: `/silos/${ id }`,
 }))(SiloDetail);

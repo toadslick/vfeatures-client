@@ -33,9 +33,9 @@ class SilosList extends Component {
 }
 
 export default connect(() => ({
-  silosRequest: `silos`,
+  silosRequest: `/silos`,
   releasesRequest: {
-    url: `releases`,
+    url: `/releases`,
     then: releases => ({ value: mapByID(releases) }),
   },
 }))(SilosList);

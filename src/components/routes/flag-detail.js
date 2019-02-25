@@ -66,7 +66,7 @@ export default session(connect(props => {
     session,
   } = props;
 
-  const url = `flags/${id}`;
+  const url = `/flags/${ id }`;
 
   return {
     request: url,

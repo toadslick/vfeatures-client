@@ -31,5 +31,5 @@ class ReleasesList extends Component {
 }
 
 export default connect(() => ({
-  request: `releases`,
+  request: `/releases`,
 }))(ReleasesList);

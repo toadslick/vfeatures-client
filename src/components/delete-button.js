@@ -20,8 +20,6 @@ class DeleteButton extends Component {
 
     if (!session.authorized()) { return null; }
 
-    console.log('REDIRECT URL', redirectURL);
-    console.log('REQUEST', request);
     if (redirectURL && request && request.fulfilled) {
       return <Redirect to={ redirectURL }/>;
     }

@@ -1,5 +1,5 @@
 export default Object.freeze({
 
-  apiRoot: 'http://localhost:3000/',
+  apiRoot: 'http://localhost:3000',
 
 });

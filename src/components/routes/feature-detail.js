@@ -43,9 +43,9 @@ class FeatureDetail extends Component {
 }
 
 export default connect(({ match: { params: { id }}}) => ({
-  featureRequest: `features/${ id }`,
+  featureRequest: `/features/${ id }`,
   releasesRequest: {
-    url: `releases`,
+    url: `/releases`,
     then: releases => ({ value: mapByID(releases) }),
   },
 }))(FeatureDetail);

@@ -32,7 +32,7 @@ class ReleaseDetail extends Component {
         </h2>
         <ul>{ listItems }</ul>
         <DeleteButton
-          requestURL={ `releases/${ id }` }
+          requestURL={ `/releases/${ id }` }
           redirectURL='/releases'
           value={ key }
         >
@@ -53,9 +53,9 @@ class ReleaseDetail extends Component {
 }
 
 export default connect(({ match: { params: { id }}}) => ({
-  releaseRequest: `releases/${ id }`,
+  releaseRequest: `/releases/${ id }`,
   featuresRequest: {
-    url: `features`,
+    url: `/features`,
     then: features => ({ value: mapByID(features) }),
   },
 }))(ReleaseDetail);
