@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import connect from '../../utils/refetch/api-connector';
 import mapByID from '../../utils/map-by-id';
 import RequestResult from '../request-result';
+import DeleteButton from '../delete-button';
 
 class ReleaseDetail extends Component {
 
@@ -30,6 +31,13 @@ class ReleaseDetail extends Component {
           : { key }
         </h2>
         <ul>{ listItems }</ul>
+        <DeleteButton
+          requestURL={ `releases/${ id }` }
+          redirectURL='/releases'
+          value={ key }
+        >
+          Delete { key }
+        </DeleteButton>
       </main>
     );
   }

@@ -9,15 +9,29 @@ import RequestFieldset from './request-fieldset';
 
 class DeleteButton extends Component {
   render() {
-    const { children, request, sendRequest, redirectURL } = this.props;
+    const {
+      session,
+      children,
+      request,
+      sendRequest,
+      redirectURL,
+      value,
+    } = this.props;
 
+    if (!session.authorized()) { return null; }
+
+    console.log('REDIRECT URL', redirectURL);
+    console.log('REQUEST', request);
     if (redirectURL && request && request.fulfilled) {
       return <Redirect to={ redirectURL }/>;
     }
 
     return (
       <RequestFieldset requests={ [request] }>
-        <ConfirmationButton onConfirm={ sendRequest }>
+        <ConfirmationButton
+          value={ value }
+          onConfirm={ sendRequest }
+        >
           { children }
         </ConfirmationButton>
       </RequestFieldset>
@@ -28,6 +42,7 @@ class DeleteButton extends Component {
 DeleteButton.defaultProps = {
   requestURL: '',
   redirectURL: '',
+  request: null,
 };
 
 export default session(connect(({ requestURL, session }) => ({

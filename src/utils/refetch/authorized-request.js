@@ -15,10 +15,12 @@ export default function authorizedRequest(session, options) {
     handleResponse: response => {
 
       const { headers, status } = response;
-      const json = response.json();
 
       // Return if the response has no body to parse.
-      if (headers.get('content-length') === '0' || status === 204) { return; }
+      if (headers.get('content-length') === '0') { return; }
+      if (status === 204 || status === 200) { return; }
+
+      const json = response.json();
 
       // If the successful response has a body,
       // return the JSON-parsing promise.
