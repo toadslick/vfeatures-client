@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-refetch';
 import { Link } from 'react-router-dom';
 
-import config from '../../config';
+import connect from '../../utils/refetch/api-connector';
 import RequestResult from '../request-result';
 
 class ReleasesList extends Component {
@@ -32,5 +31,5 @@ class ReleasesList extends Component {
 }
 
 export default connect(() => ({
-  request: `${config.apiRoot}/releases`,
+  request: `releases`,
 }))(ReleasesList);

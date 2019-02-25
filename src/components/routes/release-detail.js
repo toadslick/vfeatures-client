@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-refetch';
 import { Link } from 'react-router-dom';
 
-import config from '../../config';
+import connect from '../../utils/refetch/api-connector';
 import mapByID from '../../utils/map-by-id';
 import RequestResult from '../request-result';
 
@@ -46,9 +45,9 @@ class ReleaseDetail extends Component {
 }
 
 export default connect(({ match: { params: { id }}}) => ({
-  releaseRequest: `${config.apiRoot}/releases/${ id }`,
+  releaseRequest: `releases/${ id }`,
   featuresRequest: {
-    url: `${config.apiRoot}/features`,
+    url: `features`,
     then: features => ({ value: mapByID(features) }),
   },
 }))(ReleaseDetail);

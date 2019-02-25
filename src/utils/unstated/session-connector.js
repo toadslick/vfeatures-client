@@ -1,6 +1,6 @@
 import React from 'react';
 import { Subscribe } from 'unstated';
-import Session from '../containers/session';
+import Session from '../../containers/session';
 
 // This higher-order component takes a component and adds the `session` to its
 // props so that the component does not need to be wrapped in a <Subscribe>.

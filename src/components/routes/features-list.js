@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-refetch';
 import { Link } from 'react-router-dom';
-import config from '../../config';
+
+import connect from '../../utils/refetch/api-connector';
 import RequestResult from '../request-result';
 
 class FeaturesList extends Component {
@@ -31,5 +31,5 @@ class FeaturesList extends Component {
 }
 
 export default connect(() => ({
-  request: `${config.apiRoot}/features`,
+  request: `features`,
 }))(FeaturesList);

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-refetch';
 import { Link } from 'react-router-dom';
 
-import config from '../../config';
-import session from '../connect-session';
+import connect from '../../utils/refetch/api-connector';
+import session from '../../utils/unstated/session-connector';
 import authorizedRequest from '../../utils/refetch/authorized-request';
 import RequestResult from '../request-result';
 import RequestFieldset from '../request-fieldset';
@@ -67,7 +66,7 @@ export default session(connect(props => {
     session,
   } = props;
 
-  const url = `${config.apiRoot}/flags/${id}`;
+  const url = `flags/${id}`;
 
   return {
     request: url,

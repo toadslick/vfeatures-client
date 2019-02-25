@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-refetch';
 import { Link } from 'react-router-dom';
 
-import config from '../../config';
+import connect from '../../utils/refetch/api-connector';
 import RequestResult from '../request-result';
 
 class SiloDetail extends Component {
@@ -32,5 +31,5 @@ class SiloDetail extends Component {
 }
 
 export default connect(({ match: { params: { id }}}) => ({
-  request: `${config.apiRoot}/silos/${ id }`,
+  request: `silos/${ id }`,
 }))(SiloDetail);

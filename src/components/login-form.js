@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-refetch';
 
-import config from '../config';
-import session from './connect-session';
+import session from '../utils/unstated/session-connector';
+import connect from '../utils/refetch/api-connector';
 import handleLoginResponse from '../utils/refetch/handle-login-response';
 import RequestFieldset from './request-fieldset';
 
@@ -81,7 +80,7 @@ class LoginForm extends Component {
 export default session(connect(({ session }) => ({
   attempt: ({ username, password }) => ({
     request: {
-      url: `${config.apiRoot}/login`,
+      url: `login`,
       method: 'POST',
       body: JSON.stringify({ user: { username, password }}),
       force: true,

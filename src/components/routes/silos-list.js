@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-refetch';
 import { Link } from 'react-router-dom';
 
-import config from '../../config';
+import connect from '../../utils/refetch/api-connector';
 import mapByID from '../../utils/map-by-id';
 import RequestResult from '../request-result';
 
@@ -34,9 +33,9 @@ class SilosList extends Component {
 }
 
 export default connect(() => ({
-  silosRequest: `${config.apiRoot}/silos`,
+  silosRequest: `silos`,
   releasesRequest: {
-    url: `${config.apiRoot}/releases`,
+    url: `releases`,
     then: releases => ({ value: mapByID(releases) }),
   },
 }))(SilosList);
