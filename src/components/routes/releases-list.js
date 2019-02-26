@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import connect from '../../utils/refetch/api-connector';
 import RequestResult from '../request-result';
+import RequestForm from '../request-form';
 
 class ReleasesList extends Component {
 
@@ -18,18 +19,34 @@ class ReleasesList extends Component {
   }
 
   render() {
-    const { request } = this.props;
+    const { request, sendRequest } = this.props;
     return (
       <main>
         <h2>Releases</h2>
         <RequestResult requests={ [request] }>
           { this.renderResult.bind(this) }
         </RequestResult>
+        <RequestForm
+          url='/releases'
+          transform={ state => ({ release: { ...state }}) }
+          onFulfilled={ sendRequest }
+          values={{ key: '' }}
+          revealButtonContent='Create Release'
+        >
+          { field => field(<input type='text' name='key'/>) }
+        </RequestForm>
       </main>
     );
   }
 }
 
 export default connect(() => ({
-  request: `/releases`,
+  request: '/releases',
+  sendRequest: () => ({
+    request: {
+      url: '/releases',
+      refreshing: true,
+      force: true,
+    }
+  })
 }))(ReleasesList);

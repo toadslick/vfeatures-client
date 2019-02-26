@@ -1,21 +1,13 @@
 import React, { Component } from 'react';
+import ContentRevealingButton from './content-revealing-button';
 
 class ConfirmationButton extends Component {
   state = {
-    confirming: false,
     confirmValue: '',
   }
 
-  confirm(e) {
+  reset() {
     this.setState({
-      confirming: true,
-      confirmValue: '',
-    });
-  }
-
-  cancel(e) {
-    this.setState({
-      confirming: false,
       confirmValue: '',
     });
   }
@@ -36,50 +28,33 @@ class ConfirmationButton extends Component {
     }
   }
 
-  renderButton() {
-    const { children } = this.props;
-    return (
-      <button
-        type='button'
-        onClick={ this.confirm.bind(this) }
-      >
-        { children }
-      </button>
-    );
-  }
-
-  renderConfirmation() {
-    const { value } = this.props;
+  render() {
+    const { value, children } = this.props;
     const { confirmValue } = this.state;
     return (
-      <form onSubmit={ this.submit.bind(this) }>
-        <p>
-          { `Enter "${value}" to confirm.` }
-        </p>
-        <input
-          type='text'
-          value={ confirmValue }
-          onChange={ this.input.bind(this, 'confirmValue') }
-          placeholder='Enter value'
-        />
-        <button>Confirm</button>
-        <button
-          type='button'
-          onClick={ this.cancel.bind(this) }
-        >
-          Cancel
-        </button>
-      </form>
+      <ContentRevealingButton buttonContent={ children }>
+        { hideContent => (
+          <form onSubmit={ this.submit.bind(this) }>
+            <p>
+              { `Enter "${value}" to confirm.` }
+            </p>
+            <input
+              type='text'
+              value={ confirmValue }
+              onChange={ this.input.bind(this, 'confirmValue') }
+              placeholder='Enter value'
+            />
+            <button>Confirm</button>
+            <button
+              type='button'
+              onClick={ () => this.reset() || hideContent() }
+            >
+              Cancel
+            </button>
+          </form>
+        )}
+      </ContentRevealingButton>
     );
-  }
-
-  render() {
-    const { confirming } = this.state;
-    if (confirming) {
-      return this.renderConfirmation();
-    } else {
-      return this.renderButton();
-    }
   }
 }
 

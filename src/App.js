@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Route, Link, Switch } from 'react-router-dom';
 
 import './App.css';
@@ -56,7 +56,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
+      <Fragment>
         <nav>
           <ul>
             { this.links() }
@@ -68,7 +68,7 @@ export default class App extends Component {
         <Switch>
           { this.routes() }
         </Switch>
-      </div>
+      </Fragment>
     );
   }
 };

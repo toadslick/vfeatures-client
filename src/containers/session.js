@@ -1,24 +1,25 @@
 import { Container } from 'unstated';
+import * as Cookie from 'js-cookie';
+
+import { sessionDurationInDays } from '../utils/config';
+
+const cookieKey = 'session';
+const cookieOptions = { expires: sessionDurationInDays };
 
 // This Unstated Container stores the state of the currently logged-in user.
 // The `token` is the value of the JWT bearer token that is used in
 // `Authorization` headers of authenticated requests.
-//
-// TODO: uses cookies instead of localStorage so that the JWT token expires
-// on the client side at the same time that it expires on the server side.
-// This prevents a user from appearing to be logged in when their JWT session
-// has already expired on the server.
 
 export default class Session extends Container {
-  state = {
-    username: null, // localStorage.getItem('username'),
-    token: null, // localStorage.getItem('token'),
-  };
+  constructor() {
+    super();
+    const { username, token } = Cookie.getJSON(cookieKey) || {};
+    this.state = { username, token };
+  }
 
   login(username, token) {
     this.setState({ username, token });
-    // localStorage.setItem('username', username);
-    // localStorage.setItem('token', token);
+    Cookie.set(cookieKey, { username, token }, cookieOptions);
   }
 
   logout() {
@@ -26,8 +27,7 @@ export default class Session extends Container {
       username: null,
       token: null,
     });
-    // localStorage.removeItem('username');
-    // localStorage.removeItem('token');
+    Cookie.remove(cookieKey);
   }
 
   authorized() {
