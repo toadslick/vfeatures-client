@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import connect from '../../utils/refetch/api-connector';
 import mapBy from '../../utils/map-by-property';
+import renderReleasesSelect from '../../utils/render-releases-select';
 import RequestResult from '../request-result';
 import RequestForm from '../request-form';
 
@@ -18,18 +19,6 @@ class SilosList extends Component {
       </li>
     );
     return <ul>{ listItems }</ul>;
-  }
-
-  renderSelect(releasesList) {
-    const options = releasesList.map(({ id, key }) =>
-      <option value={ id } key={ id }>{ key }</option>
-    );
-    return (
-      <select name='release_id'>
-        <option>Select a Release...</option>
-        { options }
-      </select>
-    );
   }
 
   renderResult([ silos, { releasesList, releasesMap } ]) {
@@ -54,7 +43,7 @@ class SilosList extends Component {
                 placeholder='Key'
                 autoComplete='off'
               />) }
-              { field(this.renderSelect(releasesList)) }
+              { field(renderReleasesSelect(releasesList)) }
             </label>
           )}
         </RequestForm>
