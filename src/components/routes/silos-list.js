@@ -48,13 +48,12 @@ class SilosList extends Component {
           { field => (
             <label>
               <span>Key</span>
-              { field(
-                <input
-                  type='text'
-                  name='key'
-                  placeholder='Key'
-                  autoComplete='off'/>
-              )}
+              { field(<input
+                type='text'
+                name='key'
+                placeholder='Key'
+                autoComplete='off'
+              />) }
               { field(this.renderSelect(releasesList)) }
             </label>
           )}
