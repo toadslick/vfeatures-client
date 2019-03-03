@@ -36,7 +36,13 @@ class ReleasesList extends Component {
           { field => (
             <label>
               <span>Key</span>
-              { field(<input type='text' name='key' placeholder='Key'/>) }
+              { field(
+                <input
+                  type='text'
+                  name='key'
+                  placeholder='Key'
+                  autoComplete='off'/>
+              )}
             </label>
           )}
         </RequestForm>

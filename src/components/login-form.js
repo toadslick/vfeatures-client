@@ -59,6 +59,7 @@ class LoginForm extends Component {
                 type='text'
                 onChange={ this.input.bind(this, 'username') }
                 placeholder='Username'
+                autoComplete='off'
               />
             </label>
             <label>
