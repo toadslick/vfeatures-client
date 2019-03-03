@@ -27,8 +27,7 @@ class ReleaseDetail extends Component {
         <h2>
           <Link to='/releases'>
             Releases
-          </Link>
-          : { key }
+          </Link> / { key }
         </h2>
         <ul>{ listItems }</ul>
         <DeleteButton

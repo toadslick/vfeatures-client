@@ -13,10 +13,13 @@ class SiloDetail extends Component {
         <h2>
           <Link to='/silos'>
             Silos
-          </Link>
-          : { key }
+          </Link> / { key }
         </h2>
-        <p>{ release.key }</p>
+        <p>
+          <Link to={ `/releases/${ release.id }` }>
+            { release.key }
+          </Link>
+        </p>
         <DeleteButton
           requestURL={ `/silos/${ id }` }
           redirectURL='/silos'

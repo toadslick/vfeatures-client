@@ -23,14 +23,11 @@ class FlagDetail extends Component {
     return (
       <main>
         <h2>
-          Flag for {
-          <Link to={ '/features/' + feature.id }>
+          Flags / <Link to={ '/features/' + feature.id }>
             { feature.key }
-          </Link>
-          } on {
-          <Link to={ '/releases/' + release.id }>
+          </Link> / <Link to={ '/releases/' + release.id }>
             { release.key }
-          </Link> }
+          </Link>
         </h2>
         <p>
           { enabled ? 'enabled' : 'disabled' }

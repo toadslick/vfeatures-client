@@ -25,8 +25,7 @@ class FeatureDetail extends Component {
         <h2>
           <Link to='/features'>
             Features
-          </Link>
-          : { key }
+          </Link> / { key }
         </h2>
         <ul>{ listItems }</ul>
         <DeleteButton
