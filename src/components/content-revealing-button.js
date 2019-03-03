@@ -7,15 +7,17 @@ import React, { Component } from 'react';
 // This is so that multiple actions can call the "hide" function, such as
 // submitting a form, clicking a "cancel" button, or clicking outside of a modal.
 
-export default class ContentRevealingButton extends Component {
+class ContentRevealingButton extends Component {
   state = { contentVisible: false }
 
   showContent() {
     this.setState({ contentVisible: true });
+    this.props.onReveal();
   }
 
   hideContent() {
     this.setState({ contentVisible: false });
+    this.props.onHide();
   }
 
   render() {
@@ -36,3 +38,10 @@ export default class ContentRevealingButton extends Component {
     }
   }
 }
+
+ContentRevealingButton.defaultProps = {
+  onHide: () => {},
+  onReveal: () => {},
+};
+
+export default ContentRevealingButton;

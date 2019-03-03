@@ -22,7 +22,6 @@ class Form extends Component {
     } = this.props;
     sendRequest(method, transform(this.state), () => {
       hideContent();
-      this.reset();
       onFulfilled();
     });
   }
@@ -60,7 +59,7 @@ class Form extends Component {
 
     return (
       <RequestFieldset requests={ [request] }>
-        <ContentRevealingButton buttonContent={ revealButtonContent }>
+        <ContentRevealingButton onReveal={ this.reset.bind(this) } buttonContent={ revealButtonContent }>
           { hideContent => (
             <form onSubmit={ this.submit.bind(this, hideContent) }>
               <Fragment>

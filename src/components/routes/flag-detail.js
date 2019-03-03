@@ -38,7 +38,7 @@ class FlagDetail extends Component {
               type='button'
               onClick= { this.toggleClicked.bind(this) }
             >
-              { enabled ? 'disable flag' : 'enable flag' }
+              { enabled ? 'Disable Flag' : 'Enable Flag' }
             </button>
           </RequestFieldset>
         }
