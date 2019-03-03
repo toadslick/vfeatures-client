@@ -33,7 +33,12 @@ class ReleasesList extends Component {
           values={{ key: '' }}
           revealButtonContent='Create Release'
         >
-          { field => field(<input type='text' name='key'/>) }
+          { field => (
+            <label>
+              <span>Key</span>
+              { field(<input type='text' name='key' placeholder='Key'/>) }
+            </label>
+          )}
         </RequestForm>
       </main>
     );

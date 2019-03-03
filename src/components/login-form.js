@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
 import session from '../utils/unstated/session-connector';
 import connect from '../utils/refetch/api-connector';
@@ -39,7 +39,7 @@ class LoginForm extends Component {
 
     if (session.authorized()) {
       return (
-        <Fragment>
+        <fieldset>
           <p>{ session.state.username }</p>
           <button
             type='button'
@@ -47,7 +47,7 @@ class LoginForm extends Component {
           >
             Log Out
           </button>
-        </Fragment>
+        </fieldset>
       );
     } else {
       return (

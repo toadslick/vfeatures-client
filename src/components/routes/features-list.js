@@ -33,7 +33,12 @@ class FeaturesList extends Component {
           values={{ key: '' }}
           revealButtonContent='Create Feature'
         >
-          { field => field(<input type='text' name='key'/>) }
+          { field => (
+            <label>
+              <span>Key</span>
+              { field(<input type='text' name='key' placeholder='Key'/>) }
+            </label>
+          )}
         </RequestForm>
       </main>
     );
