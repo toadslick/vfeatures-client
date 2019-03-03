@@ -65,12 +65,12 @@ class SilosList extends Component {
   render() {
     const { silosRequest, releasesRequest } = this.props;
     return (
-      <main>
+      <Fragment>
         <h2>Silos</h2>
         <RequestResult requests={ [silosRequest, releasesRequest] }>
           { this.renderResult.bind(this) }
         </RequestResult>
-      </main>
+      </Fragment>
     );
   }
 }

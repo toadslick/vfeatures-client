@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 import connect from '../../utils/refetch/api-connector';
@@ -21,7 +21,7 @@ class FlagDetail extends Component {
   renderResult([{ id, enabled, feature, release }]) {
     const { session, request } = this.props;
     return (
-      <main>
+      <Fragment>
         <h2>
           Flags / <Link to={ '/features/' + feature.id }>
             { feature.key }
@@ -42,7 +42,7 @@ class FlagDetail extends Component {
             </button>
           </RequestFieldset>
         }
-      </main>
+      </Fragment>
     );
   }
 

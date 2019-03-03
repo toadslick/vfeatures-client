@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 import connect from '../../utils/refetch/api-connector';
@@ -28,7 +28,7 @@ class ReleaseDetail extends Component {
     const { sendReleaseRequest } = this.props;
 
     return (
-      <main>
+      <Fragment>
         <h2>
           <Link to='/releases'>
             Releases
@@ -62,7 +62,7 @@ class ReleaseDetail extends Component {
         >
           Delete
         </DeleteButton>
-      </main>
+      </Fragment>
     );
   }
 

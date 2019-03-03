@@ -65,9 +65,11 @@ export default class App extends Component {
         <aside>
           <LoginForm/>
         </aside>
-        <Switch>
-          { this.routes() }
-        </Switch>
+        <main>
+          <Switch>
+            { this.routes() }
+          </Switch>
+        </main>
       </Fragment>
     );
   }

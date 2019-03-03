@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 import connect from '../../utils/refetch/api-connector';
@@ -9,7 +9,7 @@ class SiloDetail extends Component {
 
   renderResult([{ id, key, release }]) {
     return (
-      <main>
+      <Fragment>
         <h2>
           <Link to='/silos'>
             Silos
@@ -27,7 +27,7 @@ class SiloDetail extends Component {
         >
           Delete { key }
         </DeleteButton>
-      </main>
+      </Fragment>
     );
   }
 

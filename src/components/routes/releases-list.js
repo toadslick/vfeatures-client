@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 import connect from '../../utils/refetch/api-connector';
@@ -21,7 +21,7 @@ class ReleasesList extends Component {
   render() {
     const { request, sendRequest } = this.props;
     return (
-      <main>
+      <Fragment>
         <h2>Releases</h2>
         <RequestResult requests={ [request] }>
           { this.renderResult.bind(this) }
@@ -45,7 +45,7 @@ class ReleasesList extends Component {
             </label>
           )}
         </RequestForm>
-      </main>
+      </Fragment>
     );
   }
 }
