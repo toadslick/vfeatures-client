@@ -6,6 +6,7 @@ import session from '../../utils/unstated/session-connector';
 import authorizedRequest from '../../utils/refetch/authorized-request';
 import RequestResult from '../request-result';
 import RequestFieldset from '../request-fieldset';
+import ChangesList from '../changes-list';
 
 class FlagDetail extends Component {
 
@@ -47,32 +48,28 @@ class FlagDetail extends Component {
   }
 
   render() {
-    const { request } = this.props;
+    const {
+      request,
+      match: { params: { id }},
+    } = this.props;
     return (
-      <RequestResult requests={ [request] }>
-        { this.renderResult.bind(this) }
-      </RequestResult>
+      <Fragment>
+        <RequestResult requests={ [request] }>
+          { this.renderResult.bind(this) }
+        </RequestResult>
+        <ChangesList type='Flag' id={ id }/>
+      </Fragment>
     );
   }
 }
 
-export default session(connect(props => {
-
-  const {
-    match: { params: { id }},
-    session,
-  } = props;
-
-  const url = `/flags/${ id }`;
-
-  return {
-    request: url,
+export default session(connect(({ session, match: { params: { id }}}) => ({
+    request: '/flags/' + id,
     sendToggleRequest: enabled => ({
       request: authorizedRequest(session, {
-        url,
+        url: '/flags/' + id,
         method: 'PUT',
         body: JSON.stringify({ flag: { enabled }}),
       }),
     }),
-  };
-})(FlagDetail));
+}))(FlagDetail));

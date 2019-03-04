@@ -6,6 +6,7 @@ import renderReleasesSelect from '../../utils/render-releases-select';
 import RequestResult from '../request-result';
 import RequestForm from '../request-form';
 import DeleteButton from '../delete-button';
+import ChangesList from '../changes-list';
 
 class SiloDetail extends Component {
 
@@ -57,11 +58,18 @@ class SiloDetail extends Component {
   }
 
   render() {
-    const { siloRequest, releasesRequest } = this.props;
+    const {
+      siloRequest,
+      releasesRequest,
+      match: { params: { id }},
+    } = this.props;
     return (
-      <RequestResult requests={ [siloRequest, releasesRequest] }>
-        { this.renderResult.bind(this) }
-      </RequestResult>
+      <Fragment>
+        <RequestResult requests={ [siloRequest, releasesRequest] }>
+          { this.renderResult.bind(this) }
+        </RequestResult>
+        <ChangesList type='Silo' id={ id }/>
+      </Fragment>
     );
   }
 }
