@@ -20,17 +20,19 @@ class SiloDetail extends Component {
             Silos
           </Link> / { key }
         </h2>
-        <p>
-          <Link to={ '/releases/' + release.id }>
-            { release.key }
-          </Link>
-        </p>
+        { release &&
+          <p>
+            <Link to={ '/releases/' + release.id }>
+              { release.key }
+            </Link>
+          </p>
+        }
         <RequestForm
           url={ '/silos/' + id }
           method='PUT'
           transform={ state => ({ silo: { ...state }}) }
           onFulfilled={ sendSiloRequest }
-          values={{ key, release_id: release.id }}
+          values={{ key, release_id: release ? release.id : ''}}
           revealButtonContent='Edit'
         >
           { field => (

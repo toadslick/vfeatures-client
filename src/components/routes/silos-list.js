@@ -10,14 +10,18 @@ import RequestForm from '../request-form';
 class SilosList extends Component {
 
   renderList(silos, releasesMap) {
-    const listItems = silos.map(({ id, key, release_id }) =>
-      <li key={ key }>
-        <Link to={ `/silos/${id}` }>
-          { key }
-        </Link>
-        : { releasesMap[release_id].key }
-      </li>
-    );
+    const listItems = silos.map(({ id, key, release_id }) => {
+      const release = releasesMap[release_id];
+
+      return (
+        <li key={ key }>
+          <Link to={ `/silos/${id}` }>
+            { key }
+          </Link>
+          : { release && release.key }
+        </li>
+      );
+    });
     return <ul>{ listItems }</ul>;
   }
 

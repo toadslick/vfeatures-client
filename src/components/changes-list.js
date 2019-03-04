@@ -26,12 +26,12 @@ class ChangesList extends Component {
   }
 
   renderChange(change, user) {
-    const { action, created_at } = change;
+    const { target_action, created_at } = change;
     const { username } = user;
     return (
       <li key={ change.id }>
         <span>
-          { this.renderAction[action](change, user) }
+          { this.renderAction[target_action](change, user) }
         </span> by <Link to={ '/users/' + user.id }>
           { username }
         </Link> on <time dateTime={ created_at }>
