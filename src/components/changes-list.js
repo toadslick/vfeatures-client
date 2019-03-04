@@ -51,12 +51,9 @@ class ChangesList extends Component {
   render() {
     const { changesRequest, usersRequest } = this.props;
     return (
-      <Fragment>
-        <h3>History</h3>
-        <RequestResult requests={ [changesRequest, usersRequest] }>
-          { this.renderList.bind(this) }
-        </RequestResult>
-      </Fragment>
+      <RequestResult requests={ [changesRequest, usersRequest] }>
+        { this.renderList.bind(this) }
+      </RequestResult>
     );
   }
 }
@@ -66,7 +63,14 @@ ChangesList.defaultProps = {
 };
 
 export default connect(({ type, id, page }) => ({
-  changesRequest: `/changes?target_type=${ type }&target_id=${ id }&page={ page }`,
+  changesRequest: {
+    url: '/changes',
+    query: {
+      target_type: type,
+      target_id: id,
+      page: page,
+    },
+  },
   usersRequest: {
     url: `/users`,
     then: users => ({ value: mapBy('id', users) }),
