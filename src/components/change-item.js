@@ -8,35 +8,69 @@ const actionName = {
   destroy: 'deleted',
 };
 
+const attrKeys = {
+  release_id: 'release',
+};
+
+const attrValues = {
+  enabled: function(value) {
+    return <code>{ value ? 'ON' : 'OFF' }</code>;
+  },
+  release_id: function(value, releasesMap) {
+    const release = releasesMap[value];
+    if (release) {
+      const { key, id } = release;
+      return <Link to={ '/releases/' + id }>{ key }</Link>;
+    } else {
+      return <Link to={ '/history?type=Release&id=' + value }>(deleted)</Link>
+    }
+  },
+};
+
 export default class ChangeItem extends Component {
+  transformAttrKey(key) {
+    return attrKeys[key] || key;
+  }
 
-  renderAction = {
+  transformAttrValue(key, value) {
+    const { releasesMap } = this.props;
+    const func = attrValues[key];
+    return (func && func(value, releasesMap)) || <code>{ value }</code>;
+  }
 
-    create: (diff) => {
-      const attrList = Object.keys(diff).map(key => (
-        <li key={ key }>
-          { key }
-          { ': ' }
-          <code>{ diff[key][1] }</code>
-        </li>
-      ));
-      return <ul>{ attrList }</ul>;
-    },
+  renderDiff() {
+    const { change: { target_action }} = this.props;
+    return {
+      create: this.renderCreate(),
+      update: this.renderUpdate(),
+    }[target_action] || null;
+  }
 
-    update: (diff) => {
-      const attrList = Object.keys(diff).map(key => (
-        <li key={ key }>
-        { key }
+
+  renderCreate() {
+    const { change: { diff }} = this.props;
+    const attrList = Object.keys(diff).map(attr => (
+      <li key={ attr }>
+        { this.transformAttrKey(attr) }
+        { ': ' }
+        { this.transformAttrValue(attr, diff[attr][1]) }
+      </li>
+    ));
+    return <ul>{ attrList }</ul>;
+  }
+
+  renderUpdate() {
+    const { change: { diff }} = this.props;
+    const attrList = Object.keys(diff).map(attr => (
+      <li key={ attr }>
+        { this.transformAttrKey(attr) }
         { ': from ' }
-        <code>{ diff[key][0] }</code>
+        { this.transformAttrValue(attr, diff[attr][0]) }
         { ' to ' }
-        <code>{ diff[key][1] }</code>
-        </li>
-      ));
-      return <ul>{ attrList }</ul>;
-    },
-
-    delete: (diff) => null,
+        { this.transformAttrValue(attr, diff[attr][1]) }
+      </li>
+    ));
+    return <ul>{ attrList }</ul>;
   }
 
   render() {
@@ -44,7 +78,6 @@ export default class ChangeItem extends Component {
       change: {
         target_action,
         created_at,
-        diff,
         target_type,
         target_key,
       },
@@ -69,7 +102,7 @@ export default class ChangeItem extends Component {
         <Link to={ '/history?user=' + id }>
           { username }
         </Link>
-        { this.renderAction[target_action](diff) }
+        { this.renderDiff() }
       </Fragment>
     );
   }
