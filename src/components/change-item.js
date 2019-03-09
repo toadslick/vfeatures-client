@@ -22,7 +22,7 @@ const attrValues = {
       const { key, id } = release;
       return <Link to={ '/releases/' + id }>{ key }</Link>;
     } else {
-      return <Link to={ '/history?type=Release&id=' + value }>(deleted)</Link>
+      return <Link to={{ pathname: '/history', search: `?type=Release&id=${value}` }}>(deleted)</Link>
     }
   },
 };
@@ -99,7 +99,7 @@ export default class ChangeItem extends Component {
         { ' ' }
         { actionName[target_action] }
         { ' by ' }
-        <Link to={ '/history?user=' + id }>
+        <Link to={{ pathname: '/history', search: `?user=${id}` }}>
           { username }
         </Link>
         { this.renderDiff() }

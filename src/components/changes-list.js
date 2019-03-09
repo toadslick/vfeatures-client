@@ -25,11 +25,10 @@ class ChangesList extends Component {
 
     return (
       <Fragment>
-        <h3>History</h3>
         <ul>{ items }</ul>
         { total > length &&
           <p>
-            <Link to={ `/history?type=${type}&id=${id}&page=1` }>
+            <Link to={{ pathname: '/history', search: `?type=${type}&id=${id}&page=1` }}>
               Earlier changes...
             </Link>
           </p>
@@ -41,16 +40,15 @@ class ChangesList extends Component {
   render() {
     const { changesRequest, usersRequest, releasesRequest } = this.props;
     return (
-      <RequestResult requests={ [changesRequest, usersRequest, releasesRequest] }>
-        { this.renderList.bind(this) }
-      </RequestResult>
+      <Fragment>
+        <h3>History</h3>
+        <RequestResult requests={ [changesRequest, usersRequest, releasesRequest] }>
+          { this.renderList.bind(this) }
+        </RequestResult>
+      </Fragment>
     );
   }
 }
-
-ChangesList.defaultProps = {
-  page: 0,
-};
 
 export default connect(({ type, id, page }) => ({
   changesRequest: {
