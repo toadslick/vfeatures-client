@@ -13,3 +13,14 @@ button, input, select, textarea {
   margin-block-end: 1em;
   display: block;
 }
+
+a {
+  text-decoration: none;
+}
+
+code {
+  padding: 2px 4px;
+  background: #eee;
+  display: inline-block;
+  border-radius: 4px;
+}
