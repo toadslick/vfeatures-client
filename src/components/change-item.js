@@ -18,12 +18,8 @@ const attrValues = {
   },
   release_id: function(value, releasesMap) {
     const release = releasesMap[value];
-    if (release) {
-      const { key, id } = release;
-      return <Link to={ '/releases/' + id }>{ key }</Link>;
-    } else {
-      return <Link to={{ pathname: '/history', search: `?type=Release&id=${value}` }}>(deleted)</Link>
-    }
+    const key = release ? release.key : '(deleted)';
+    return <Link to={{ pathname: '/history', search: `?type=Release&id=${value}` }}>{ key }</Link>
   },
 };
 
@@ -80,6 +76,7 @@ export default class ChangeItem extends Component {
         created_at,
         target_type,
         target_key,
+        target_id,
       },
       user: {
         id,
@@ -95,7 +92,9 @@ export default class ChangeItem extends Component {
         <br/>
         { target_type }
         { ' ' }
-        <code>{ target_key }</code>
+        <Link to={{ pathname: '/history', search: `?type=${target_type}&id=${target_id}` }}>
+          { target_key }
+        </Link>
         { ' ' }
         { actionName[target_action] }
         { ' by ' }
