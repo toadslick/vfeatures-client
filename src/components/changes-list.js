@@ -5,38 +5,59 @@ import connect from '../utils/refetch/api-connector';
 import RequestResult from './request-result';
 import mapBy from '../utils/map-by-property';
 
+const actionName = {
+  create: 'created',
+  update: 'updated',
+  destroy: 'deleted',
+};
+
 class ChangesList extends Component {
 
   renderAction = {
-    create: (change) => (
-      <Fragment>
-        Created <br/>
-        { JSON.stringify(change.diff) }
-      </Fragment>
-    ),
-    update: (change) => (
-      <Fragment>
-        Updated <br/>
-        { JSON.stringify(change.diff) }
-      </Fragment>
-    ),
-    delete: (change) => (
-      'Deleted'
-    ),
+    create: (diff) => {
+      const attrList = Object.keys(diff).map(key => (
+        <li key={ key }>
+          { key }
+          { ': ' }
+          <code>{ diff[key][1] }</code>
+        </li>
+      ));
+      return <ul>{ attrList }</ul>;
+    },
+    update: (diff) => {
+      const attrList = Object.keys(diff).map(key => (
+        <li key={ key }>
+        { key }
+        { ': ' }
+        <code>{ diff[key][0] }</code>
+        { ' -> ' }
+        <code>{ diff[key][1] }</code>
+        </li>
+      ));
+      return <ul>{ attrList }</ul>;
+    },
+    delete: (diff) => null,
   }
 
   renderChange(change, user) {
-    const { target_action, created_at } = change;
+    const { target_action, created_at, diff, target_type, target_key } = change;
     const { username } = user;
     return (
       <li key={ change.id }>
-        <span>
-          { this.renderAction[target_action](change, user) }
-        </span> by <Link to={ '/users/' + user.id }>
+        { target_type }
+        { ' ' }
+        <code>{ target_key }</code>
+        { ' ' }
+        { actionName[target_action] }
+        { ' by ' }
+        <Link to={ '/users/' + user.id }>
           { username }
-        </Link> on <time dateTime={ created_at }>
+        </Link>
+        { ' on ' }
+        <time dateTime={ created_at }>
           { created_at }
         </time>
+        { this.renderAction[target_action](diff, user) }
       </li>
     );
   }
