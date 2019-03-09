@@ -6,7 +6,7 @@ import mapBy from '../../utils/map-by-property';
 import RequestResult from '../request-result';
 import RequestForm from '../request-form';
 import DeleteButton from '../delete-button';
-import ChangesList from '../changes-list';
+import ChangesList from '../changes-for-record';
 
 class FeatureDetail extends Component {
 

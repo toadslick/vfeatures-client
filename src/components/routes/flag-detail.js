@@ -6,7 +6,7 @@ import session from '../../utils/unstated/session-connector';
 import authorizedRequest from '../../utils/refetch/authorized-request';
 import RequestResult from '../request-result';
 import RequestFieldset from '../request-fieldset';
-import ChangesList from '../changes-list';
+import ChangesList from '../changes-for-record';
 
 class FlagDetail extends Component {
 

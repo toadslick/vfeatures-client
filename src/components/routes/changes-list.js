@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 
 import ChangeItem from '../change-item';
+import ChangesQueryForm from '../changes-query-form';
 import connect from '../../utils/refetch/api-connector';
 import query from '../../utils/refetch/query-connector';
 import RequestResult from '../request-result';
@@ -27,6 +28,7 @@ class ChangesList extends Component {
     return (
       <Fragment>
         <h2>History</h2>
+        <ChangesQueryForm/>
         <RequestResult requests={ [changesRequest, usersRequest, releasesRequest] }>
           { this.renderList.bind(this) }
         </RequestResult>
