@@ -1,27 +1,28 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import { stringify } from 'query-string';
 
-import query from '../utils/refetch/query-connector';
+import withQuery from '../utils/query-connector';
 
-const typeOptions = [
-  { key: 'Features', value: 'Feature' },
-  { key: 'Releases', value: 'Release' },
-  { key: 'Silos', value: 'Silo' },
-  { key: 'Flags', value: 'Flag' },
-];
+const typeOptions = {
+  'Feature': 'Feature',
+  'Release': 'Release',
+  'Silo': 'Silo',
+  'Flag': 'Flag',
+};
 
-const actionOptions = [
-  { key: 'Create', value: 'create' },
-  { key: 'Update', value: 'update' },
-  { key: 'Delete', value: 'destroy' },
-];
+const actionOptions = {
+  'Create': 'create',
+  'Update': 'update',
+  'Delete': 'destroy',
+};
 
-class ChangesQueryForm extends Component {
+class ChangesQueryForm extends PureComponent {
   constructor(props) {
     super(props);
-    const { queryParams: { type, id, action, user }} = this.props;
+    const { queryParams: { type, action, user }} = this.props;
     this.state = {
       targetType: type,
-      targetID: id,
       targetAction: action,
       userID: user,
     };
@@ -35,12 +36,19 @@ class ChangesQueryForm extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log('SUBMIT', this.state);
+    const { history } = this.props;
+    const { targetType, targetAction, userID } = this.state;
+    const query = {
+      type: targetType,
+      action: targetAction,
+      user: userID,
+    };
+    history.push({ pathname: '/history', search: stringify(query) });
   }
 
   renderOptions(options, prompt) {
-    const elements = options.map(({ key, value }) => (
-      <option key={ value } value={ value }>{ key }</option>
+    const elements = Object.keys(options).map(key => (
+      <option key={ key } value={ options[key] }>{ key }</option>
     ));
     elements.unshift(<option key=''>{ prompt }</option>);
     return elements;
@@ -73,10 +81,14 @@ class ChangesQueryForm extends Component {
           </label>
 
           <button>Filter History</button>
+
+          <p>
+            <Link to='/history'>Clear Filter</Link>
+          </p>
         </fieldset>
       </form>
     );
   }
 }
 
-export default query(ChangesQueryForm);
+export default withQuery(withRouter(ChangesQueryForm));

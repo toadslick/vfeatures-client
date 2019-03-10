@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
+import TimeAgo from 'react-timeago';
 
 const actionName = {
   create: 'created',
@@ -86,6 +87,8 @@ export default class ChangeItem extends Component {
 
     return (
       <Fragment>
+        <TimeAgo date={ created_at }/>
+        <br/>
         <Moment format='LLLL'>
           { created_at }
         </Moment>

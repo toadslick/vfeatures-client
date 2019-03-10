@@ -3,7 +3,7 @@ import React, { Component, Fragment } from 'react';
 import ChangeItem from '../change-item';
 import ChangesQueryForm from '../changes-query-form';
 import connect from '../../utils/refetch/api-connector';
-import query from '../../utils/refetch/query-connector';
+import withQuery from '../../utils/query-connector';
 import RequestResult from '../request-result';
 import mapBy from '../../utils/map-by-property';
 
@@ -37,7 +37,7 @@ class ChangesList extends Component {
   }
 }
 
-export default query(connect(({ queryParams: { type, id, page, action, user }}) => ({
+export default withQuery(connect(({ queryParams: { type, id, page, action, user }}) => ({
   changesRequest: {
     url: '/changes',
     query: {
