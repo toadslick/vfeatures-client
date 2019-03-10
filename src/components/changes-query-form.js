@@ -1,8 +1,6 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { stringify } from 'query-string';
-
-import withQuery from '../utils/query-connector';
+import { parse, stringify } from 'query-string';
 
 const typeOptions = {
   'Feature': 'Feature',
@@ -17,15 +15,28 @@ const actionOptions = {
   'Delete': 'destroy',
 };
 
-class ChangesQueryForm extends PureComponent {
-  constructor(props) {
-    super(props);
-    const { queryParams: { type, action, user }} = this.props;
-    this.state = {
-      targetType: type,
-      targetAction: action,
-      userID: user,
-    };
+class ChangesQueryForm extends Component {
+  state = {
+    targetType: '',
+    targetAction: '',
+  }
+
+  parseQueryParams(location) {
+    const { type, action } = parse(location.search);
+    this.setState({
+      targetType: type || '',
+      targetAction: action || '',
+    });
+  }
+
+  componentWillMount() {
+    const { history } = this.props;
+    this.unlisten = history.listen(this.parseQueryParams.bind(this));
+    this.parseQueryParams(window.location.search);
+  }
+
+  componentWillUnmount() {
+    this.unlisten();
   }
 
   inputChanged(key, e) {
@@ -37,11 +48,10 @@ class ChangesQueryForm extends PureComponent {
   onSubmit(e) {
     e.preventDefault();
     const { history } = this.props;
-    const { targetType, targetAction, userID } = this.state;
+    const { targetType, targetAction } = this.state;
     const query = {
-      type: targetType,
-      action: targetAction,
-      user: userID,
+      type: targetType || undefined,
+      action: targetAction || undefined,
     };
     history.push({ pathname: '/history', search: stringify(query) });
   }
@@ -50,7 +60,7 @@ class ChangesQueryForm extends PureComponent {
     const elements = Object.keys(options).map(key => (
       <option key={ key } value={ options[key] }>{ key }</option>
     ));
-    elements.unshift(<option key=''>{ prompt }</option>);
+    elements.unshift(<option key='' value=''>{ prompt }</option>);
     return elements;
   }
 
@@ -59,6 +69,7 @@ class ChangesQueryForm extends PureComponent {
     return (
       <form onSubmit={ this.onSubmit.bind(this) }>
         <fieldset>
+          <legend>Filter History</legend>
 
           <label>
             <span>Type:</span>
@@ -91,4 +102,4 @@ class ChangesQueryForm extends PureComponent {
   }
 }
 
-export default withQuery(withRouter(ChangesQueryForm));
+export default withRouter(ChangesQueryForm);
