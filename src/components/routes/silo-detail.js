@@ -33,7 +33,8 @@ class SiloDetail extends Component {
           transform={ state => ({ silo: { ...state }}) }
           onFulfilled={ sendSiloRequest }
           values={{ key, release_id: release ? release.id : ''}}
-          revealButtonContent='Edit'
+          revealButtonContent='Edit...'
+          legend='Edit Silo'
         >
           { field => (
             <label>
@@ -52,8 +53,9 @@ class SiloDetail extends Component {
           requestURL={ '/silos/' + id }
           redirectURL='/silos'
           value={ key }
+          legend='Delete Silo'
         >
-          Delete
+          Delete...
         </DeleteButton>
       </Fragment>
     );

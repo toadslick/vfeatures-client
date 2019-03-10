@@ -42,7 +42,8 @@ class FeatureDetail extends Component {
           transform={ state => ({ feature: { ...state }}) }
           onFulfilled={ sendFeatureRequest }
           values={{ key }}
-          revealButtonContent='Edit'
+          revealButtonContent='Edit...'
+          legend='Edit Feature'
         >
           { field => (
             <label>
@@ -60,8 +61,9 @@ class FeatureDetail extends Component {
           requestURL={ '/features/' + id }
           redirectURL='/features'
           value={ key }
+          legend='Delete Feature'
         >
-          Delete
+          Delete...
         </DeleteButton>
       </Fragment>
     );

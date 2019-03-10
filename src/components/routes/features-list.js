@@ -31,7 +31,8 @@ class FeaturesList extends Component {
           transform={ state => ({ feature: { ...state }}) }
           onFulfilled={ sendRequest }
           values={{ key: '' }}
-          revealButtonContent='Create Feature'
+          revealButtonContent='Create...'
+          legend='Create Feature'
         >
           { field => (
             <label>

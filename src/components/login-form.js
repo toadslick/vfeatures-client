@@ -40,6 +40,7 @@ class LoginForm extends Component {
     if (session.authorized()) {
       return (
         <fieldset>
+          <legend>Current User</legend>
           <p>{ session.state.username }</p>
           <button
             type='button'
@@ -53,6 +54,8 @@ class LoginForm extends Component {
       return (
         <form onSubmit={ this.login.bind(this) }>
           <RequestFieldset requests={ [request] }>
+            <legend>Log In</legend>
+
             <label>
               <span>Username</span>
               <input

@@ -38,6 +38,7 @@ class FlagDetail extends Component {
         </p>
         { session.authorized() &&
           <RequestFieldset requests={ [request] }>
+            <legend>Toggle Flag</legend>
             <button
               type='button'
               onClick= { this.toggleClicked.bind(this) }

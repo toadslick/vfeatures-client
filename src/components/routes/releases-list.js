@@ -31,7 +31,8 @@ class ReleasesList extends Component {
           transform={ state => ({ release: { ...state }}) }
           onFulfilled={ sendRequest }
           values={{ key: '' }}
-          revealButtonContent='Create Release'
+          revealButtonContent='Create...'
+          legend='Create Release'
         >
           { field => (
             <label>

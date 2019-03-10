@@ -42,7 +42,8 @@ class ReleaseDetail extends Component {
           transform={ state => ({ release: { ...state }}) }
           onFulfilled={ sendReleaseRequest }
           values={{ key }}
-          revealButtonContent='Edit'
+          revealButtonContent='Edit...'
+          legend='Edit Release'
         >
           { field => (
             <label>
@@ -60,8 +61,9 @@ class ReleaseDetail extends Component {
           requestURL={ '/releases/' + id }
           redirectURL='/releases'
           value={ key }
+          legend='Delete Release'
         >
-          Delete
+          Delete...
         </DeleteButton>
       </Fragment>
     );

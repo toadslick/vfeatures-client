@@ -36,7 +36,8 @@ class SilosList extends Component {
           transform={ state => ({ silo: { ...state }}) }
           onFulfilled={ sendSilosRequest }
           values={{ key: '', release_id: '' }}
-          revealButtonContent='Create Silo'
+          revealButtonContent='Create...'
+          legend='Create Silo'
         >
           { field => (
             <label>

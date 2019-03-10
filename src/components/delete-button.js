@@ -16,6 +16,7 @@ class DeleteButton extends Component {
       sendRequest,
       redirectURL,
       value,
+      legend,
     } = this.props;
 
     if (!session.authorized()) { return null; }
@@ -26,6 +27,7 @@ class DeleteButton extends Component {
 
     return (
       <RequestFieldset requests={ [request] }>
+        { legend && <legend>{ legend }</legend> }
         <ConfirmationButton
           value={ value }
           onConfirm={ sendRequest }
@@ -41,6 +43,7 @@ DeleteButton.defaultProps = {
   requestURL: '',
   redirectURL: '',
   request: null,
+  legend: 'Delete',
 };
 
 export default session(connect(({ requestURL, session }) => ({

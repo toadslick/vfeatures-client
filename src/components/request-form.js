@@ -49,6 +49,7 @@ class Form extends Component {
     const {
       session,
       request,
+      legend,
       children,
       submitButtonContent,
       revealButtonContent,
@@ -59,6 +60,7 @@ class Form extends Component {
 
     return (
       <RequestFieldset requests={ [request] }>
+        { legend && <legend>{ legend }</legend> }
         <ContentRevealingButton onReveal={ this.reset.bind(this) } buttonContent={ revealButtonContent }>
           { hideContent => (
             <form onSubmit={ this.submit.bind(this, hideContent) }>
