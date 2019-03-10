@@ -45,7 +45,7 @@ class ReleaseDetail extends Component {
           revealButtonContent='Edit...'
           legend='Edit Release'
         >
-          { field => (
+          { (field, focusRef) => (
             <label>
               <span>Key</span>
               { field(<input
@@ -53,6 +53,7 @@ class ReleaseDetail extends Component {
                 name='key'
                 placeholder='Key'
                 autoComplete='off'
+                ref={ focusRef }
               />) }
             </label>
           )}

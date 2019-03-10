@@ -36,7 +36,7 @@ class SiloDetail extends Component {
           revealButtonContent='Edit...'
           legend='Edit Silo'
         >
-          { field => (
+          { (field, focusRef) => (
             <label>
               <span>Key</span>
               { field(<input
@@ -44,6 +44,7 @@ class SiloDetail extends Component {
                 name='key'
                 placeholder='Key'
                 autoComplete='off'
+                ref={ focusRef }
               />) }
               { field(renderReleasesSelect(releases)) }
             </label>

@@ -62,10 +62,10 @@ class Form extends Component {
       <RequestFieldset requests={ [request] }>
         { legend && <legend>{ legend }</legend> }
         <ContentRevealingButton onReveal={ this.reset.bind(this) } buttonContent={ revealButtonContent }>
-          { hideContent => (
+          { (hideContent, focusRef) => (
             <form onSubmit={ this.submit.bind(this, hideContent) }>
               <Fragment>
-                { children(this.addField.bind(this)) }
+                { children(this.addField.bind(this), focusRef) }
                 <button>{ submitButtonContent }</button>
                 <button
                   type='button'

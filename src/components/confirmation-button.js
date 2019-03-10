@@ -33,7 +33,7 @@ class ConfirmationButton extends Component {
     const { confirmValue } = this.state;
     return (
       <ContentRevealingButton buttonContent={ children }>
-        { hideContent => (
+        { (hideContent, focusRef) => (
           <form onSubmit={ this.submit.bind(this) }>
             <p>
               { `Enter "${value}" to confirm.` }
@@ -43,6 +43,7 @@ class ConfirmationButton extends Component {
               value={ confirmValue }
               onChange={ this.input.bind(this, 'confirmValue') }
               placeholder='Enter value'
+              ref={ focusRef }
             />
             <button>Confirm</button>
             <button

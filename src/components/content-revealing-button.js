@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 
 // This component hides all of its children until the button is clicked.
 // The children are passed a "hide" function that, when called,
@@ -8,11 +8,22 @@ import React, { Component } from 'react';
 // submitting a form, clicking a "cancel" button, or clicking outside of a modal.
 
 class ContentRevealingButton extends Component {
-  state = { contentVisible: false }
+
+  constructor(props) {
+    super(props);
+    this.state = { contentVisible: false }
+    this.focusRef = createRef();
+  }
 
   showContent() {
     this.setState({ contentVisible: true });
     this.props.onReveal();
+
+    // If an element has been assigned the `focusRef` as their ref,
+    // assign focus to that element after the content has rendered.
+    window.setTimeout(() => {
+      this.focusRef.current && this.focusRef.current.focus();
+    }, 0);
   }
 
   hideContent() {
@@ -25,7 +36,7 @@ class ContentRevealingButton extends Component {
     const { contentVisible } = this.state;
 
     if (contentVisible) {
-      return children(this.hideContent.bind(this));
+      return children(this.hideContent.bind(this), this.focusRef);
     } else {
       return (
         <button
