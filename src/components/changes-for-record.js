@@ -40,12 +40,12 @@ class ChangesList extends Component {
   render() {
     const { changesRequest, usersRequest, releasesRequest } = this.props;
     return (
-      <Fragment>
-        <h3>History</h3>
+      <aside id='history'>
+        <h2>Latest Changes</h2>
         <RequestResult requests={ [changesRequest, usersRequest, releasesRequest] }>
           { this.renderList.bind(this) }
         </RequestResult>
-      </Fragment>
+      </aside>
     );
   }
 }
