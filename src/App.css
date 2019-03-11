@@ -1,4 +1,85 @@
-#root {
+/* login form */
+
+nav fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+}
+
+nav legend {
+  position: absolute;
+  left: -9999px;
+}
+
+nav fieldset > div {
+  display: flex;
+  justify-content: center;
+  background: #eee;
+}
+
+nav input {
+  padding: 5px;
+  width: 150px;
+  background: #fff;
+  border: 1px solid #ddd;
+  font-weight: 400;
+}
+
+nav input, nav button {
+  margin: 10px 5px;
+  border-radius: 4px;
+}
+
+nav button {
+  background: #07c;
+  color: #fff;
+  font-weight: 500;
+  border: none;
+}
+
+/* navigation */
+
+nav ul {
+  display: flex;
+  list-style-type: none;
+  justify-content: center;
+  margin: 0;
+  padding: 10px 0 0 0;
+  background: #eee;
+}
+
+nav li {
+  display: block;
+  max-width: 150px;
+  flex-grow: 1;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  display: block;
+  text-align: center;
+  padding: 10px 0;
+  color: #000;
+  font-weight: 500;
+}
+
+nav a:hover, nav a:focus {
+  color: #07c;
+}
+
+nav a.active {
+  background: #fff;
+  color: #07c;
+}
+
+
+
+
+
+main {
   padding: 0 20px 20px 20px;
 }
 

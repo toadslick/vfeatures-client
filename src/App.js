@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Route, Link, Switch } from 'react-router-dom';
+import { Route, NavLink, Switch } from 'react-router-dom';
 
 import './App.css';
 import LoginForm from './components/login-form';
@@ -36,9 +36,9 @@ export default class App extends Component {
   links() {
     return navItems.map(({ path, title }) => (
       <li key={ path }>
-        <Link to={ path }>
+        <NavLink exact to={ path }>
           { title }
-        </Link>
+        </NavLink>
       </li>
     ));
   }
@@ -58,13 +58,11 @@ export default class App extends Component {
     return (
       <Fragment>
         <nav>
+          <LoginForm/>
           <ul>
             { this.links() }
           </ul>
         </nav>
-        <aside>
-          <LoginForm/>
-        </aside>
         <main>
           <Switch>
             { this.routes() }
