@@ -22,7 +22,7 @@ class FeaturesList extends Component {
     const { request, sendRequest } = this.props;
     return (
       <Fragment>
-        <h2>Features</h2>
+        <h1>Features</h1>
         <RequestResult requests={ [request] }>
           { this.renderResult.bind(this) }
         </RequestResult>

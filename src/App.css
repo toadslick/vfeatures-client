@@ -1,40 +1,100 @@
-/* login form */
+/* general */
 
-nav fieldset {
+main {
+  padding: 0 20px 20px 20px;
+}
+
+h1 {
+  text-align: center;
+  font-weight: 300;
+  font-size: 2em;
+}
+
+h1 span {
+  color: #bbb;
+}
+
+a {
+  text-decoration: none;
+  color: #07c;
+  font-weight: 500;
+}
+
+/* forms */
+
+fieldset {
   border: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: row;
 }
 
-nav legend {
+legend {
   position: absolute;
   left: -9999px;
 }
 
-nav fieldset > div {
-  display: flex;
-  justify-content: center;
-  background: #eee;
+button, input, select, textarea {
+  font-size: 1em;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  display: block;
 }
 
-nav input {
+input, select {
   padding: 5px;
-  width: 150px;
+  width: 200px;
   background: #fff;
-  border: 1px solid #ddd;
+  border: 1px solid #bbb;
   font-weight: 400;
+  border-radius: 4px;
+}
+
+select {
+  width: 210px;
+}
+
+main label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: auto;
+  border-bottom: 1px solid #ddd;
+}
+
+main label span {
+  font-weight: 500;
+}
+
+/* login form */
+
+nav {
+  user-select: none;
+}
+
+nav fieldset > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background: #f3f3f3;
+  border-bottom: 1px solid #ddd;
+}
+
+nav label span {
+  position: absolute;
+  left: -9999px;
 }
 
 nav input, nav button {
   margin: 10px 5px;
-  border-radius: 4px;
+}
+
+nav input {
+  width: 125px;
 }
 
 nav button {
-  background: #07c;
-  color: #fff;
+  background: transparent;
+  color: #07c;
   font-weight: 500;
   border: none;
 }
@@ -47,7 +107,7 @@ nav ul {
   justify-content: center;
   margin: 0;
   padding: 10px 0 0 0;
-  background: #eee;
+  background: #f3f3f3;
 }
 
 nav li {
@@ -64,44 +124,16 @@ nav a {
   padding: 10px 0;
   color: #000;
   font-weight: 500;
+  border-bottom: 1px solid #ddd;
 }
 
-nav a:hover, nav a:focus {
+nav a:hover,
+nav a:focus {
   color: #07c;
 }
 
 nav a.active {
   background: #fff;
-  color: #07c;
-}
-
-
-
-
-
-main {
-  padding: 0 20px 20px 20px;
-}
-
-label span {
-  position: absolute;
-  left: -9999px;
-}
-
-button, input, select, textarea {
-  font-size: 1em;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  display: block;
-}
-
-a {
-  text-decoration: none;
-}
-
-code {
-  padding: 2px 4px;
-  background: #eee;
-  display: inline-block;
-  border-radius: 4px;
+  color: #000;
+  border-bottom-color: #fff;
 }

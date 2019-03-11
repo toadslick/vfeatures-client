@@ -27,7 +27,7 @@ class ChangesList extends Component {
     const { changesRequest, usersRequest, releasesRequest } = this.props;
     return (
       <Fragment>
-        <h2>History</h2>
+        <h1>History</h1>
         <ChangesQueryForm/>
         <RequestResult requests={ [changesRequest, usersRequest, releasesRequest] }>
           { this.renderList.bind(this) }

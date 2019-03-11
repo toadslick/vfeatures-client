@@ -16,11 +16,13 @@ class SiloDetail extends Component {
 
     return (
       <Fragment>
-        <h2>
+        <h1>
           <Link to='/silos'>
             Silos
-          </Link> / { key }
-        </h2>
+          </Link>
+          <span> / </span>
+          { key }
+        </h1>
         { release &&
           <p>
             <Link to={ '/releases/' + release.id }>
@@ -38,17 +40,22 @@ class SiloDetail extends Component {
           legend='Edit Silo'
         >
           { (field, focusRef) => (
-            <label>
-              <span>Key</span>
-              { field(<input
-                type='text'
-                name='key'
-                placeholder='Key'
-                autoComplete='off'
-                ref={ focusRef }
-              />) }
-              { field(renderReleasesSelect(releases)) }
-            </label>
+            <Fragment>
+              <label>
+                <span>Key</span>
+                { field(<input
+                  type='text'
+                  name='key'
+                  placeholder='Key'
+                  autoComplete='off'
+                  ref={ focusRef }
+                />) }
+              </label>
+              <label>
+                <span>Release</span>
+                { field(renderReleasesSelect(releases)) }
+              </label>
+            </Fragment>
           )}
         </RequestForm>
         <DeleteButton

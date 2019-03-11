@@ -38,7 +38,7 @@ class Fieldset extends Component {
         disabled={ disabled }
         className={ className }
       >
-        { children }
+        <div>{ children }</div>
       </fieldset>
     );
   }

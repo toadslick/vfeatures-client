@@ -36,7 +36,10 @@ export default class App extends Component {
   links() {
     return navItems.map(({ path, title }) => (
       <li key={ path }>
-        <NavLink exact to={ path }>
+        <NavLink
+          exact={ path === '/' }
+          to={ path }
+        >
           { title }
         </NavLink>
       </li>

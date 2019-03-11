@@ -40,17 +40,22 @@ class SilosList extends Component {
           legend='Create Silo'
         >
           { (field, focusRef) => (
-            <label>
-              <span>Key</span>
-              { field(<input
-                type='text'
-                name='key'
-                placeholder='Key'
-                autoComplete='off'
-                ref={ focusRef }
-              />) }
-              { field(renderReleasesSelect(releasesList)) }
-            </label>
+            <Fragment>
+              <label>
+                <span>Key</span>
+                { field(<input
+                  type='text'
+                  name='key'
+                  placeholder='Key'
+                  autoComplete='off'
+                  ref={ focusRef }
+                />) }
+              </label>
+              <label>
+                <span>Release</span>
+                { field(renderReleasesSelect(releasesList)) }
+              </label>
+            </Fragment>
           )}
         </RequestForm>
       </Fragment>
@@ -61,7 +66,7 @@ class SilosList extends Component {
     const { silosRequest, releasesRequest } = this.props;
     return (
       <Fragment>
-        <h2>Silos</h2>
+        <h1>Silos</h1>
         <RequestResult requests={ [silosRequest, releasesRequest] }>
           { this.renderResult.bind(this) }
         </RequestResult>

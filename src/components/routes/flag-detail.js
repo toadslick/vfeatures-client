@@ -25,16 +25,17 @@ class FlagDetail extends Component {
 
     return (
       <Fragment>
-        <h2>
-          { 'Flags / ' }
+        <h1>
+          Flags
+          <span> / </span>
           <Link to={ '/releases/' + release.id }>
             { release.key }
           </Link>
-          { ' / ' }
+          <span> / </span>
           <Link to={ '/features/' + feature.id }>
             { feature.key }
           </Link>
-        </h2>
+        </h1>
         <p>
           { enabled ? 'enabled' : 'disabled' }
         </p>

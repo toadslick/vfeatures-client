@@ -31,11 +31,13 @@ class FeatureDetail extends Component {
 
     return (
       <Fragment>
-        <h2>
+        <h1>
           <Link to='/features'>
             Features
-          </Link> / { key }
-        </h2>
+          </Link>
+          <span> / </span>
+          { key }
+        </h1>
         { this.renderList(flags, releasesMap) }
         <RequestForm
           url={ '/features/' + id }

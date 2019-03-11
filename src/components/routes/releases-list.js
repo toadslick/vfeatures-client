@@ -22,7 +22,7 @@ class ReleasesList extends Component {
     const { request, sendRequest } = this.props;
     return (
       <Fragment>
-        <h2>Releases</h2>
+        <h1>Releases</h1>
         <RequestResult requests={ [request] }>
           { this.renderResult.bind(this) }
         </RequestResult>
