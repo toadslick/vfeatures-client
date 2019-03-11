@@ -15,7 +15,7 @@ const attrKeys = {
 
 const attrValues = {
   enabled: function(value) {
-    return <code>{ value ? 'ON' : 'OFF' }</code>;
+    return <span>{ value ? 'ON' : 'OFF' }</span>;
   },
   release_id: function(value, releasesMap) {
     const release = releasesMap[value];
@@ -32,7 +32,7 @@ export default class ChangeItem extends Component {
   transformAttrValue(key, value) {
     const { releasesMap } = this.props;
     const func = attrValues[key];
-    return (func && func(value, releasesMap)) || <code>{ value }</code>;
+    return (func && func(value, releasesMap)) || <span>{ value }</span>;
   }
 
   renderDiff() {
@@ -53,21 +53,26 @@ export default class ChangeItem extends Component {
         { this.transformAttrValue(attr, diff[attr][1]) }
       </li>
     ));
-    return <ul>{ attrList }</ul>;
+    return <ul className='history-item-diff'>
+      { attrList }
+    </ul>;
   }
 
   renderUpdate() {
     const { change: { diff }} = this.props;
     const attrList = Object.keys(diff).map(attr => (
       <li key={ attr }>
-        { this.transformAttrKey(attr) }
-        { ': from ' }
+        { 'Changed '}
+        <span>{ this.transformAttrKey(attr) }</span>
+        { ' from ' }
         { this.transformAttrValue(attr, diff[attr][0]) }
         { ' to ' }
         { this.transformAttrValue(attr, diff[attr][1]) }
       </li>
     ));
-    return <ul>{ attrList }</ul>;
+    return <ul className='history-item-diff'>
+      { attrList }
+    </ul>;
   }
 
   render() {
@@ -87,23 +92,26 @@ export default class ChangeItem extends Component {
 
     return (
       <Fragment>
-        <TimeAgo date={ created_at }/>
-        <br/>
-        <Moment format='LLLL'>
-          { created_at }
-        </Moment>
-        <br/>
-        { target_type }
-        { ' ' }
-        <Link to={{ pathname: '/history', search: `?type=${target_type}&id=${target_id}` }}>
-          { target_key }
-        </Link>
-        { ' ' }
-        { actionName[target_action] }
-        { ' by ' }
-        <Link to={{ pathname: '/history', search: `?user=${id}` }}>
-          { username }
-        </Link>
+        <p className='history-item-time'>
+          <TimeAgo date={ created_at }/>
+          <span> | </span>
+          <Moment format='LLL'>
+            { created_at }
+          </Moment>
+        </p>
+        <p className='history-item-desc'>
+          { target_type }
+          { ' ' }
+          <Link to={{ pathname: '/history', search: `?type=${target_type}&id=${target_id}` }}>
+            { target_key }
+          </Link>
+          { ' ' }
+          { actionName[target_action] }
+          { ' by ' }
+          <Link to={{ pathname: '/history', search: `?user=${id}` }}>
+            { username }
+          </Link>
+        </p>
         { this.renderDiff() }
       </Fragment>
     );
