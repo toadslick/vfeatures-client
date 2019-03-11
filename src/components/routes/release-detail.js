@@ -6,7 +6,7 @@ import mapBy from '../../utils/map-by-property';
 import RequestResult from '../request-result';
 import RequestForm from '../request-form';
 import DeleteButton from '../delete-button';
-import ChangesList from '../changes-for-record';
+import ChangesForRecord from '../changes-for-record';
 
 class ReleaseDetail extends Component {
 
@@ -25,7 +25,8 @@ class ReleaseDetail extends Component {
     return <ul>{ listItems }</ul>;
   }
 
-  renderResult([{ id, key, flags }, featuresMap]) {
+  renderResult([release, featuresMap]) {
+    const { id, key, flags } = release;
     const { sendReleaseRequest } = this.props;
 
     return (
@@ -66,23 +67,17 @@ class ReleaseDetail extends Component {
         >
           Delete...
         </DeleteButton>
+        <ChangesForRecord type='Release' id={ id } record={ release }/>
       </Fragment>
     );
   }
 
   render() {
-    const {
-      releaseRequest,
-      featuresRequest,
-      match: { params: { id }},
-    } = this.props;
+    const { releaseRequest, featuresRequest } = this.props;
     return (
-      <Fragment>
-        <RequestResult requests={ [releaseRequest, featuresRequest] }>
-          { this.renderResult.bind(this) }
-        </RequestResult>
-        <ChangesList type='Release' id={ id }/>
-      </Fragment>
+      <RequestResult requests={ [releaseRequest, featuresRequest] }>
+        { this.renderResult.bind(this) }
+      </RequestResult>
     );
   }
 }

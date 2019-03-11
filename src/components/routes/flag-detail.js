@@ -6,7 +6,7 @@ import session from '../../utils/unstated/session-connector';
 import authorizedRequest from '../../utils/refetch/authorized-request';
 import RequestResult from '../request-result';
 import RequestFieldset from '../request-fieldset';
-import ChangesList from '../changes-for-record';
+import ChangesForRecord from '../changes-for-record';
 
 class FlagDetail extends Component {
 
@@ -19,8 +19,10 @@ class FlagDetail extends Component {
     sendToggleRequest(!enabled);
   }
 
-  renderResult([{ id, enabled, feature, release }]) {
+  renderResult([flag]) {
+    const { id, enabled, feature, release } = flag;
     const { session, request } = this.props;
+
     return (
       <Fragment>
         <h2>
@@ -47,22 +49,17 @@ class FlagDetail extends Component {
             </button>
           </RequestFieldset>
         }
+        <ChangesForRecord type='Flag' id={ id } record={ flag }/>
       </Fragment>
     );
   }
 
   render() {
-    const {
-      request,
-      match: { params: { id }},
-    } = this.props;
+    const { request } = this.props;
     return (
-      <Fragment>
-        <RequestResult requests={ [request] }>
-          { this.renderResult.bind(this) }
-        </RequestResult>
-        <ChangesList type='Flag' id={ id }/>
-      </Fragment>
+      <RequestResult requests={ [request] }>
+        { this.renderResult.bind(this) }
+      </RequestResult>
     );
   }
 }

@@ -58,6 +58,7 @@ export default connect(({ type, id, page }) => ({
       target_id: id,
       page: page,
     },
+    force: true,
   },
   usersRequest: {
     url: `/users`,
