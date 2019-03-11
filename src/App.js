@@ -16,7 +16,7 @@ import Home from './components/routes/home';
 import Fallback from './components/routes/fallback';
 
 const navItems = [
-  { path: '/', title: 'Home', component: Home },
+  { path: '/', title: 'Dashboard', component: Home },
   { path: '/silos', title: 'Silos', component: SilosList },
   { path: '/releases', title: 'Releases', component: ReleasesList },
   { path: '/features', title: 'Features', component: FeaturesList },
