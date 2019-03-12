@@ -21,6 +21,13 @@ a {
   font-weight: 500;
 }
 
+a:hover,
+a:focus,
+button:hover,
+button:focus {
+  text-decoration: underline;
+}
+
 h1 a {
   font-weight: 400;
 }
@@ -52,9 +59,8 @@ td {
   border-top: 1px solid #e7e7e7;
 }
 
-th,
-tr:nth-child(2n) td {
-  background-color: #f1f9ff;
+tr:nth-child(2n+1) td {
+  background-color: #f4faff;
 }
 
 /* forms */
@@ -251,5 +257,25 @@ nav a.active {
 /* flag status */
 
 .flag-status {
-  /*  */
+  color: #fff;
+  display: inline-block;
+  font-weight: 700;
+  text-transform: uppercase;
+  min-width: 40px;
+  text-align: center;
+  border-radius: 1em;
+}
+
+.flag-status.flag-enabled {
+  background: #2a0;
+}
+
+.flag-status.flag-disabled {
+  background: #f42;
+}
+
+.flag-status:hover,
+.flag-status:focus {
+  background: #07c;
+  text-decoration: none;
 }
