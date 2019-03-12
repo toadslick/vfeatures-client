@@ -1,5 +1,10 @@
 /* general */
 
+main {
+  padding: 1px 0;
+  background: #fff;
+}
+
 h1 {
   text-align: center;
   font-weight: 300;
@@ -23,6 +28,33 @@ h1 a {
 h2 {
   text-align: center;
   font-weight: 400;
+}
+
+/* tables */
+
+table {
+  margin: 0 auto 2em auto;
+}
+
+th,
+td {
+  text-align: left;
+  vertical-align: center;
+  padding: 0.5em 15px;
+}
+
+th {
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+td {
+  border-top: 1px solid #e7e7e7;
+}
+
+th,
+tr:nth-child(2n) td {
+  background-color: #f1f9ff;
 }
 
 /* forms */
@@ -145,13 +177,6 @@ nav a.active {
   color: #000;
 }
 
-/* main content well */
-
-main {
-  padding: 1px 0 0 0;
-  background: #fff;
-}
-
 /* history */
 
 #history {
@@ -221,4 +246,10 @@ main {
 
 .history-item-diff span {
   color: #000;
+}
+
+/* flag status */
+
+.flag-status {
+  /*  */
 }

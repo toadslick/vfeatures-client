@@ -8,6 +8,7 @@ import RequestForm from '../request-form';
 import DeleteButton from '../delete-button';
 import ChangesForRecord from '../changes-for-record';
 import Table from '../table';
+import FlagStatus from '../flag-status';
 
 class ReleaseDetail extends Component {
 
@@ -21,11 +22,7 @@ class ReleaseDetail extends Component {
               { featuresMap[feature_id].key }
             </Link>
           ),
-          enabled: (({ id, enabled }) => (
-            <Link to={ '/flags/' + id }>
-              { enabled ? 'enabled' : 'disabled' }
-            </Link>
-          )),
+          flag: (flag => <FlagStatus flag={ flag }/>),
         }}
       />
     );

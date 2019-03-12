@@ -24,7 +24,7 @@ export default class Table extends Component {
 
   render() {
     return (
-      <table>
+      <table cellPadding={ 0 } cellSpacing={ 0 }>
         <thead>
           <tr>
             { this.renderHeaders() }
