@@ -6,23 +6,31 @@ import mapBy from '../../utils/map-by-property';
 import renderReleasesSelect from '../../utils/render-releases-select';
 import RequestResult from '../request-result';
 import RequestForm from '../request-form';
+import Table from '../table';
 
 class SilosList extends Component {
 
   renderList(silos, releasesMap) {
-    const listItems = silos.map(({ id, key, release_id }) => {
-      const release = releasesMap[release_id];
-
-      return (
-        <li key={ key }>
-          <Link to={ `/silos/${id}` }>
-            { key }
-          </Link>
-          : { release && release.key }
-        </li>
-      );
-    });
-    return <ul>{ listItems }</ul>;
+    return (
+      <Table
+        items={ silos }
+        columns={{
+          key: ({ id, key }) => (
+            <Link to={ `/silos/${id}` }>
+              { key }
+            </Link>
+          ),
+          release: ({ release_id }) => {
+            const release = releasesMap[release_id];
+            return (
+              <Link to={ `/releases/${release_id}` }>
+                { release ? release.key : '(deleted)' }
+              </Link>
+            );
+          }
+        }}
+      />
+    );
   }
 
   renderResult([ silos, { releasesList, releasesMap } ]) {
