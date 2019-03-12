@@ -12,7 +12,7 @@ export default class Table extends Component {
   renderRows() {
     const { items, columns } = this.props;
     return items.map((item) => (
-      <tr key={ item.key }>
+      <tr key={ item.id }>
         { Object.keys(columns).map((key) => (
           <td key={ key }>
             { columns[key](item) }

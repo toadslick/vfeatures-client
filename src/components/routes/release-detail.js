@@ -7,22 +7,28 @@ import RequestResult from '../request-result';
 import RequestForm from '../request-form';
 import DeleteButton from '../delete-button';
 import ChangesForRecord from '../changes-for-record';
+import Table from '../table';
 
 class ReleaseDetail extends Component {
 
   renderList(flags, featuresMap) {
-    const listItems = flags.map(({ id, enabled, feature_id }) => {
-      const { key } = featuresMap[feature_id];
-      return (
-        <li key={ key }>
-          { key }: {
-          <Link to={ '/flags/' + id }>
-            { enabled ? 'enabled' : 'disabled' }
-          </Link> }
-        </li>
-      );
-    });
-    return <ul>{ listItems }</ul>;
+    return (
+      <Table
+        items={ flags }
+        columns={{
+          feature: ({ feature_id }) => (
+            <Link to={ `/features/${feature_id}` }>
+              { featuresMap[feature_id].key }
+            </Link>
+          ),
+          enabled: (({ id, enabled }) => (
+            <Link to={ '/flags/' + id }>
+              { enabled ? 'enabled' : 'disabled' }
+            </Link>
+          )),
+        }}
+      />
+    );
   }
 
   renderResult([release, featuresMap]) {

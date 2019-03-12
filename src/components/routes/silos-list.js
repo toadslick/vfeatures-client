@@ -22,11 +22,15 @@ class SilosList extends Component {
           ),
           release: ({ release_id }) => {
             const release = releasesMap[release_id];
-            return (
-              <Link to={ `/releases/${release_id}` }>
-                { release ? release.key : '(deleted)' }
-              </Link>
-            );
+            if (release) {
+              return (
+                <Link to={ `/releases/${release_id}` }>
+                  { release.key }
+                </Link>
+              );
+            } else {
+              return '(deleted)';
+            }
           }
         }}
       />

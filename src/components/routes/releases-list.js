@@ -4,18 +4,23 @@ import { Link } from 'react-router-dom';
 import connect from '../../utils/refetch/api-connector';
 import RequestResult from '../request-result';
 import RequestForm from '../request-form';
+import Table from '../table';
 
 class ReleasesList extends Component {
 
-  renderResult([ value ]) {
-    const listItems = value.map(({ id, key }) =>
-      <li key={ key }>
-        <Link to={ `/releases/${id}` }>
-          { key }
-        </Link>
-      </li>
+  renderResult([ releases ]) {
+    return (
+      <Table
+        items={ releases }
+        columns={{
+          key: ({ id, key }) => (
+            <Link to={ `/releases/${id}` }>
+              { key }
+            </Link>
+          ),
+        }}
+      />
     );
-    return <ul>{ listItems }</ul>;
   }
 
   render() {
