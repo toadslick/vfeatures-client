@@ -254,28 +254,28 @@ nav a.active {
   color: #000;
 }
 
-/* flag status */
+/* flag status in tables */
 
-.flag-status {
-  color: #fff;
-  display: inline-block;
-  font-weight: 700;
+table .flag-status {
   text-transform: uppercase;
-  min-width: 40px;
-  text-align: center;
+}
+
+table .flag-status:before {
+  content: " ";
+  display: inline-block;
+  width: 1em;
+  height: 1em;
   border-radius: 1em;
-}
-
-.flag-status.flag-enabled {
-  background: #2a0;
-}
-
-.flag-status.flag-disabled {
-  background: #f42;
-}
-
-.flag-status:hover,
-.flag-status:focus {
   background: #07c;
-  text-decoration: none;
+  position: relative;
+  top: 0.1em;
+  margin-right: 0.25em;
+}
+
+table .flag-status.flag-enabled:before {
+  background: #2c0;
+}
+
+table .flag-status.flag-disabled:before {
+  background: #f42;
 }
