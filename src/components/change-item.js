@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import TimeAgo from 'react-timeago';
@@ -91,11 +91,11 @@ export default class ChangeItem extends Component {
     } = this.props;
 
     return (
-      <Fragment>
+      <li>
         <p className='history-item-time'>
           <TimeAgo date={ created_at }/>
           <span> | </span>
-          <Moment format='LLL'>
+          <Moment format='LLLL'>
             { created_at }
           </Moment>
         </p>
@@ -113,7 +113,7 @@ export default class ChangeItem extends Component {
           </Link>
         </p>
         { this.renderDiff() }
-      </Fragment>
+      </li>
     );
   }
 }

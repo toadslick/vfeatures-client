@@ -11,13 +11,12 @@ class ChangesList extends Component {
 
   renderList([{ changes, pagination }, usersMap, releasesMap ]) {
     const items = changes.map(change => (
-      <li key={ change.id }>
-        <ChangeItem
-          change={ change }
-          user={ usersMap[change.user_id] }
-          releasesMap={ releasesMap }
-        />
-      </li>
+      <ChangeItem
+        key={ change.id }
+        change={ change }
+        user={ usersMap[change.user_id] }
+        releasesMap={ releasesMap }
+      />
     ));
 
     return <ul>{ items }</ul>;

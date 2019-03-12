@@ -14,13 +14,12 @@ class ChangesList extends Component {
     const { type, id } = this.props;
 
     const items = changes.map(change => (
-      <li key={ change.id }>
-        <ChangeItem
-          change={ change }
-          user={ usersMap[change.user_id] }
-          releasesMap={ releasesMap }
-        />
-      </li>
+      <ChangeItem
+        key={ change.id }
+        change={ change }
+        user={ usersMap[change.user_id] }
+        releasesMap={ releasesMap }
+      />
     ));
 
     return (
