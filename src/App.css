@@ -69,6 +69,7 @@ fieldset {
   border: none;
   margin: 0;
   padding: 0;
+  margin: auto;
 }
 
 legend {
@@ -78,8 +79,8 @@ legend {
 
 button, input, select, textarea {
   font-size: 1em;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
   display: block;
 }
 
@@ -89,27 +90,54 @@ button {
 
 input, select {
   padding: 5px;
-  width: 200px;
   background: #fff;
   border: 1px solid #bbb;
   font-weight: 400;
   border-radius: 4px;
 }
 
-select {
-  width: 210px;
+input {
+  width: 200px;
 }
 
-main label {
-  display: flex;
+select {
+  width: 212px;
+}
+
+main label,
+main fieldset > div {
   align-items: center;
   justify-content: space-between;
-  margin: auto;
-  border-bottom: 1px solid #ddd;
+  display: flex;
+}
+
+main form {
+  text-align: center;
+}
+
+main fieldset {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 0 15px;
 }
 
 main label span {
   font-weight: 500;
+  margin-right: 15px;
+}
+
+main button {
+  color: #fff;
+  background: #07c;
+  border: none;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+main button:hover,
+main button:focus {
+  background: #09e;
 }
 
 /* login form */

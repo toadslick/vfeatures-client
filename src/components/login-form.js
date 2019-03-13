@@ -58,25 +58,27 @@ class LoginForm extends Component {
       return (
         <form onSubmit={ this.login.bind(this) }>
           <RequestFieldset requests={ [request] }>
-            <legend>Sign In</legend>
-            <label>
-              <span>Username</span>
-              <input
-                type='text'
-                onChange={ this.input.bind(this, 'username') }
-                placeholder='Username'
-                autoComplete='off'
-              />
-            </label>
-            <label>
-              <span>Password</span>
-              <input
-                type='password'
-                onChange={ this.input.bind(this, 'password') }
-                placeholder='Password'
-              />
-            </label>
-            <button>Sign In</button>
+            <div>
+              <legend>Sign In</legend>
+              <label>
+                <span>Username</span>
+                <input
+                  type='text'
+                  onChange={ this.input.bind(this, 'username') }
+                  placeholder='Username'
+                  autoComplete='off'
+                />
+              </label>
+              <label>
+                <span>Password</span>
+                <input
+                  type='password'
+                  onChange={ this.input.bind(this, 'password') }
+                  placeholder='Password'
+                />
+              </label>
+              <button>Sign In</button>
+            </div>
           </RequestFieldset>
         </form>
       );

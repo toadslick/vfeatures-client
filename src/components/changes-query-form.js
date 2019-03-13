@@ -72,7 +72,7 @@ class ChangesQueryForm extends Component {
           <legend>Filter History</legend>
 
           <label>
-            <span>Type</span>
+            <span>Filter by Type</span>
             <select
               value={ targetType }
               onChange={ this.inputChanged.bind(this, 'targetType') }
@@ -82,7 +82,7 @@ class ChangesQueryForm extends Component {
           </label>
 
           <label>
-            <span>Action</span>
+            <span>Filter by Action</span>
             <select
               value={ targetAction }
               onChange={ this.inputChanged.bind(this, 'targetAction') }
@@ -91,11 +91,10 @@ class ChangesQueryForm extends Component {
             </select>
           </label>
 
-          <button>Filter History</button>
-
-          <p>
+          <div>
+            <button>Filter History</button>
             <Link to='/history'>Clear Filter</Link>
-          </p>
+          </div>
         </fieldset>
       </form>
     );
